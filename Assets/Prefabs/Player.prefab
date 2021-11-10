@@ -173,6 +173,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd72a44fe8c80b4885e65d9d02a4dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentPath: {fileID: 0}
+  Duration: 0
+  Progress: 0
   DirectionInput: {x: 0, y: 0}
   Confirm: 0
 --- !u!1 &4559742639828275703
