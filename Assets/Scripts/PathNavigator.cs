@@ -32,7 +32,6 @@ public class PathNavigator : MonoBehaviour
             CurrentPosition = CurrentPath.GetPoint(Progress);
             transform.localPosition = CurrentPosition;
         }
-        StartCoroutine(PositionPlayerOnLevel());
     }
 
     IEnumerator MovePlayer()
@@ -51,21 +50,25 @@ public class PathNavigator : MonoBehaviour
         }
     }
 
-    private IEnumerator PositionPlayerOnLevel()
+    private IEnumerator PositionPlayerOnLevel(Transform LevelPosition)
     {
+        while (transform.localPosition != LevelPosition.position)
+        {
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, LevelPosition.position, Time.deltaTime * PositioningSpeed);
+            yield return null;
+        }
         while (transform.localRotation != Quaternion.Euler(0, 180, 0))
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * PositioningSpeed);
             yield return transform.localRotation;
         }
         transform.localRotation = Quaternion.Euler(0, 180, 0);
-        StopCoroutine(PositionPlayerOnLevel());
+        StopCoroutine(PositionPlayerOnLevel(LevelPosition));
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("hallo");
-        StartCoroutine(PositionPlayerOnLevel());
+        StartCoroutine(PositionPlayerOnLevel(other.transform));
     }
 
     #region Inputsystem
