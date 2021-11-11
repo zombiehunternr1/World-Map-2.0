@@ -23,7 +23,6 @@ public class PathNavigator : MonoBehaviour
     private void Start()
     {
         PositionPlayerOnCurve();
-        StartCoroutine(PositionPlayerOnLevel());
     }
 
     private void PositionPlayerOnCurve()
@@ -31,8 +30,9 @@ public class PathNavigator : MonoBehaviour
         if (CurrentPath != null)
         {
             CurrentPosition = CurrentPath.GetPoint(Progress);
-            transform.position = CurrentPosition;
+            transform.localPosition = CurrentPosition;
         }
+        StartCoroutine(PositionPlayerOnLevel());
     }
 
     IEnumerator MovePlayer()
@@ -45,21 +45,27 @@ public class PathNavigator : MonoBehaviour
                 Progress = 1f;
             }
             CurrentPosition = CurrentPath.GetPoint(Progress);
-            transform.position = CurrentPosition;
-            transform.LookAt(CurrentPosition + CurrentPath.GetPoint(Progress));
+            transform.localPosition = CurrentPosition;
+            transform.LookAt(CurrentPosition + CurrentPath.GetDirection(Progress));
             yield return Progress;
         }
     }
 
     private IEnumerator PositionPlayerOnLevel()
     {
-        while (transform.rotation != Quaternion.Euler(0, 0, 0))
+        while (transform.localRotation != Quaternion.Euler(0, 90, 0))
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, 0), Time.deltaTime * PositioningSpeed);
-            yield return transform.rotation;
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * PositioningSpeed);
+            yield return transform.localRotation;
         }
-        transform.rotation = Quaternion.identity;
+        transform.localRotation = Quaternion.Euler(0, 90, 0);
         StopCoroutine(PositionPlayerOnLevel());
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("hallo");
+        StartCoroutine(PositionPlayerOnLevel());
     }
 
     #region Inputsystem
