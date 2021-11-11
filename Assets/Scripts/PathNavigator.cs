@@ -53,12 +53,12 @@ public class PathNavigator : MonoBehaviour
 
     private IEnumerator PositionPlayerOnLevel()
     {
-        while (transform.localRotation != Quaternion.Euler(0, 90, 0))
+        while (transform.localRotation != Quaternion.Euler(0, 180, 0))
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 90, 0), Time.deltaTime * PositioningSpeed);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * PositioningSpeed);
             yield return transform.localRotation;
         }
-        transform.localRotation = Quaternion.Euler(0, 90, 0);
+        transform.localRotation = Quaternion.Euler(0, 180, 0);
         StopCoroutine(PositionPlayerOnLevel());
     }
 
