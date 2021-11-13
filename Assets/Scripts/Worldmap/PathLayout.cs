@@ -2,8 +2,9 @@
 
 public class PathLayout : MonoBehaviour {
 
+	public bool Unlocked;
 	public Vector3[] points;
-	
+
 	public Vector3 GetPoint (float t) {
 		return transform.TransformPoint(Bezier.GetPoint(points[0], points[1], points[2], points[3], t));
 	}

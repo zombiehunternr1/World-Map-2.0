@@ -116,14 +116,28 @@ public class PathNavigator : MonoBehaviour
                         {
                             if (((int)j) == DirectionValue)
                             {
-                                Progress = 1;
-                                StartCoroutine(MovePlayer());
+                                if (CurrentPath.Unlocked)
+                                {
+                                    Progress = 1;
+                                    StartCoroutine(MovePlayer());
+                                }
+                                else
+                                {
+                                    IsMoving = false;
+                                }
                             }
                         }
                     }
                     else
                     {
-                        StartCoroutine(MovePlayer());
+                        if (CurrentPath.Unlocked)
+                        {
+                            StartCoroutine(MovePlayer());
+                        }
+                        else
+                        {
+                            IsMoving = false;
+                        }
                     }
                 }
             }
@@ -143,14 +157,28 @@ public class PathNavigator : MonoBehaviour
                         {
                             if (((int)j) == DirectionValue)
                             {
-                                Progress = 1;
-                                StartCoroutine(MovePlayer());
+                                if (CurrentPath.Unlocked)
+                                {
+                                    Progress = 1;
+                                    StartCoroutine(MovePlayer());
+                                }
+                                else
+                                {
+                                    IsMoving = false;
+                                }
                             }
                         }
                     }
                     else
                     {
-                        StartCoroutine(MovePlayer());
+                        if (CurrentPath.Unlocked)
+                        {
+                            StartCoroutine(MovePlayer());
+                        }
+                        else
+                        {
+                            IsMoving = false;
+                        }
                     }
                 }
             }
@@ -170,14 +198,28 @@ public class PathNavigator : MonoBehaviour
                         {
                             if (((int)j) == DirectionValue)
                             {
-                                Progress = 1;
-                                StartCoroutine(MovePlayer());
+                                if (CurrentPath.Unlocked)
+                                {
+                                    Progress = 1;
+                                    StartCoroutine(MovePlayer());
+                                }
+                                else
+                                {
+                                    IsMoving = false;
+                                }
                             }
                         }
                     }
                     else
                     {
-                        StartCoroutine(MovePlayer());
+                        if (CurrentPath.Unlocked)
+                        {
+                            StartCoroutine(MovePlayer());
+                        }
+                        else
+                        {
+                            IsMoving = false;
+                        }
                     }
                 }
             }
@@ -197,14 +239,28 @@ public class PathNavigator : MonoBehaviour
                         {
                             if (((int)j) == DirectionValue)
                             {
-                                Progress = 1;
-                                StartCoroutine(MovePlayer());
+                                if (CurrentPath.Unlocked)
+                                {
+                                    Progress = 1;
+                                    StartCoroutine(MovePlayer());
+                                }
+                                else
+                                {
+                                    IsMoving = false;
+                                }
                             }
                         }
                     }
                     else
                     {
-                        StartCoroutine(MovePlayer());
+                        if (CurrentPath.Unlocked)
+                        {
+                            StartCoroutine(MovePlayer());
+                        }
+                        else
+                        {
+                            IsMoving = false;
+                        }
                     }
                 }
             }

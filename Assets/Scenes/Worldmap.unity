@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b6b4e22427e4efbb847bd026324e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Unlocked: 0
   points:
   - {x: 0, y: 0, z: 0}
   - {x: 5.24522, y: 0, z: -8.008883}
@@ -492,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentPath: {fileID: 672026379}
-  Duration: 10
+  Duration: 2
   Progress: 0
   PositioningSpeed: 3
   IsMoving: 0
