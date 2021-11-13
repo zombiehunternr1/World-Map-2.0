@@ -69,6 +69,8 @@ public class PathNavigator : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         StartCoroutine(PositionPlayerOnLevel(other.transform));
+        Debug.Log(other.GetComponent<LevelNodeData>().LevelInfo.LevelName);
+        Debug.Log(other.GetComponent<LevelNodeData>().LevelInfo.LevelNumber);
     }
 
     #region Inputsystem
