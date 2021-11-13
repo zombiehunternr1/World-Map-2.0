@@ -109,7 +109,20 @@ public class PathNavigator : MonoBehaviour
                 if (i == LevelNodeData.Direction.UP)
                 {
                     IsMoving = true;
+                    int Index = CurrentLevel.AvailableConnectedPaths.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.UP;
+                    if (CurrentPath != CurrentLevel.ConnectedPaths[Index])
+                    {
+                        CurrentPath = CurrentLevel.ConnectedPaths[Index];
+                        if (CurrentPath.Unlocked)
+                        {
+                            StartCoroutine(MovePlayer());
+                        }
+                        else
+                        {
+                            IsMoving = false;
+                        }
+                    }
                     if (CurrentLevel.IsPreviousPath.Count != 0)
                     {
                         foreach (var j in CurrentLevel.IsPreviousPath)
@@ -150,8 +163,21 @@ public class PathNavigator : MonoBehaviour
                 if (i == LevelNodeData.Direction.DOWN)
                 {
                     IsMoving = true;
+                    int Index = CurrentLevel.AvailableConnectedPaths.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.DOWN;
-                    if(CurrentLevel.IsPreviousPath.Count != 0)
+                    if (CurrentPath != CurrentLevel.ConnectedPaths[Index])
+                    {
+                        CurrentPath = CurrentLevel.ConnectedPaths[Index];
+                        if (CurrentPath.Unlocked)
+                        {
+                            StartCoroutine(MovePlayer());
+                        }
+                        else
+                        {
+                            IsMoving = false;
+                        }
+                    }
+                    if (CurrentLevel.IsPreviousPath.Count != 0)
                     {
                         foreach (var j in CurrentLevel.IsPreviousPath)
                         {
@@ -191,7 +217,20 @@ public class PathNavigator : MonoBehaviour
                 if (i == LevelNodeData.Direction.LEFT)
                 {
                     IsMoving = true;
+                    int Index = CurrentLevel.AvailableConnectedPaths.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.LEFT;
+                    if(CurrentPath != CurrentLevel.ConnectedPaths[Index])
+                    {
+                        CurrentPath = CurrentLevel.ConnectedPaths[Index];
+                        if (CurrentPath.Unlocked)
+                        {
+                            StartCoroutine(MovePlayer());
+                        }
+                        else
+                        {
+                            IsMoving = false;
+                        }
+                    }
                     if (CurrentLevel.IsPreviousPath.Count != 0)
                     {
                         foreach (var j in CurrentLevel.IsPreviousPath)
@@ -232,7 +271,20 @@ public class PathNavigator : MonoBehaviour
                 if (i == LevelNodeData.Direction.RIGHT)
                 {
                     IsMoving = true;
+                    int Index = CurrentLevel.AvailableConnectedPaths.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.RIGHT;
+                    if (CurrentPath != CurrentLevel.ConnectedPaths[Index])
+                    {
+                        CurrentPath = CurrentLevel.ConnectedPaths[Index];
+                        if (CurrentPath.Unlocked)
+                        {
+                            StartCoroutine(MovePlayer());
+                        }
+                        else
+                        {
+                            IsMoving = false;
+                        }
+                    }
                     if (CurrentLevel.IsPreviousPath.Count != 0)
                     {
                         foreach (var j in CurrentLevel.IsPreviousPath)
