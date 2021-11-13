@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class PathNavigator : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class PathNavigator : MonoBehaviour
     public bool GoingForward;
 
     private Vector3 CurrentPosition;
+    public LevelNodeData CurrentLevel;
 
     //Player input
     public Vector2 DirectionInput;
@@ -25,6 +27,7 @@ public class PathNavigator : MonoBehaviour
         PositionPlayerOnCurve();
     }
 
+    #region PlayerMovement
     private void PositionPlayerOnCurve()
     {
         if (CurrentPath != null)
@@ -65,19 +68,70 @@ public class PathNavigator : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0, 180, 0);
         StopCoroutine(PositionPlayerOnLevel(LevelPosition));
     }
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
         StartCoroutine(PositionPlayerOnLevel(other.transform));
-        Debug.Log(other.GetComponent<LevelNodeData>().LevelInfo.LevelName);
-        Debug.Log(other.GetComponent<LevelNodeData>().LevelInfo.LevelNumber);
+        CurrentLevel = other.GetComponent<LevelNodeData>();
+        Debug.Log(CurrentLevel.LevelInfo.LevelName);
+        Debug.Log(CurrentLevel.LevelInfo.LevelNumber);
+    }
+
+    private void CheckDirection(Vector2 SelectedDirection)
+    {
+        //Up
+        if (SelectedDirection.y == 1)
+        {
+            foreach (var i in CurrentLevel.AvailableConnectedPaths)
+            {
+                if (i == LevelNodeData.Direction.UP)
+                {
+                    Debug.Log("UP is available");
+                }
+            }
+        }
+        //Down
+        if (SelectedDirection.y == -1)
+        {
+            foreach (var i in CurrentLevel.AvailableConnectedPaths)
+            {
+                if (i == LevelNodeData.Direction.DOWN)
+                {
+                    Debug.Log("Down is available");
+                }
+            }
+        }
+        //Left
+        if (SelectedDirection.x == -1)
+        {
+            foreach (var i in CurrentLevel.AvailableConnectedPaths)
+            {
+                if (i == LevelNodeData.Direction.LEFT)
+                {
+                    Debug.Log("Left is available");
+                }
+            }
+        }
+        //Right
+        if (SelectedDirection.x == 1)
+        {
+            foreach (var i in CurrentLevel.AvailableConnectedPaths)
+            {
+                if (i == LevelNodeData.Direction.RIGHT)
+                {
+                    Debug.Log("Right is available");
+                }
+            }
+        }
     }
 
     #region Inputsystem
     public void OnDirection(InputAction.CallbackContext Context)
     {
         DirectionInput = Context.ReadValue<Vector2>();
-        StartCoroutine(MovePlayer());
+        CheckDirection(DirectionInput);
+        //StartCoroutine(MovePlayer());
     }
 
     public void OnConfirm(InputAction.CallbackContext Context)
