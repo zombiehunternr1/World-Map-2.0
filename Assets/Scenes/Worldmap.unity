@@ -472,7 +472,6 @@ GameObject:
   - component: {fileID: 2052383203}
   - component: {fileID: 2052383202}
   - component: {fileID: 2052383201}
-  - component: {fileID: 2052383200}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -480,14 +479,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!33 &2052383200
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2052383199}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &2052383201
 MonoBehaviour:
   m_ObjectHideFlags: 0
