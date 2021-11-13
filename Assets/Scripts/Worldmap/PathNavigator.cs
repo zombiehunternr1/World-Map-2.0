@@ -12,7 +12,7 @@ public class PathNavigator : MonoBehaviour
     public float Duration;
     public float Progress;
     public float PositioningSpeed;
-    public bool GoingForward;
+    public bool IsMoving;
 
     private Vector3 CurrentPosition;
     public LevelNodeData CurrentLevel;
@@ -39,17 +39,35 @@ public class PathNavigator : MonoBehaviour
 
     IEnumerator MovePlayer()
     {
-        while(Progress < 1f)
+        if (Progress < 1)
         {
-            Progress += Time.deltaTime / Duration;
-            if(Progress > 1f)
+            while (Progress < 1f)
             {
-                Progress = 1f;
+                Progress += Time.deltaTime / Duration;
+                if (Progress > 1f)
+                {
+                    Progress = 1f;
+                }
+                CurrentPosition = CurrentPath.GetPoint(Progress);
+                transform.localPosition = CurrentPosition;
+                transform.LookAt(CurrentPosition + CurrentPath.GetDirection(Progress));
+                yield return Progress;
             }
-            CurrentPosition = CurrentPath.GetPoint(Progress);
-            transform.localPosition = CurrentPosition;
-            transform.LookAt(CurrentPosition + CurrentPath.GetDirection(Progress));
-            yield return Progress;
+        }
+        else
+        {
+            while (Progress > 0)
+            {
+                Progress -= Time.deltaTime / Duration;
+                if (Progress < 0)
+                {
+                    Progress = 0;
+                }
+                CurrentPosition = CurrentPath.GetPoint(Progress);
+                transform.localPosition = CurrentPosition;
+                transform.LookAt(CurrentPosition - CurrentPath.GetDirection(Progress));
+                yield return Progress;
+            }
         }
     }
 
@@ -72,8 +90,11 @@ public class PathNavigator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        StopAllCoroutines();
         StartCoroutine(PositionPlayerOnLevel(other.transform));
         CurrentLevel = other.GetComponent<LevelNodeData>();
+        IsMoving = false;
+        Progress = 0;
         Debug.Log(CurrentLevel.LevelInfo.LevelName);
         Debug.Log(CurrentLevel.LevelInfo.LevelNumber);
     }
@@ -87,18 +108,50 @@ public class PathNavigator : MonoBehaviour
             {
                 if (i == LevelNodeData.Direction.UP)
                 {
-                    Debug.Log("UP is available");
+                    IsMoving = true;
+                    int DirectionValue = (int)LevelNodeData.Direction.UP;
+                    if (CurrentLevel.IsPreviousPath.Count != 0)
+                    {
+                        foreach (var j in CurrentLevel.IsPreviousPath)
+                        {
+                            if (((int)j) == DirectionValue)
+                            {
+                                Progress = 1;
+                                StartCoroutine(MovePlayer());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        StartCoroutine(MovePlayer());
+                    }
                 }
             }
         }
         //Down
         if (SelectedDirection.y == -1)
         {
-            foreach (var i in CurrentLevel.AvailableConnectedPaths)
+            foreach (LevelNodeData.Direction i in CurrentLevel.AvailableConnectedPaths)
             {
                 if (i == LevelNodeData.Direction.DOWN)
                 {
-                    Debug.Log("Down is available");
+                    IsMoving = true;
+                    int DirectionValue = (int)LevelNodeData.Direction.DOWN;
+                    if(CurrentLevel.IsPreviousPath.Count != 0)
+                    {
+                        foreach (var j in CurrentLevel.IsPreviousPath)
+                        {
+                            if (((int)j) == DirectionValue)
+                            {
+                                Progress = 1;
+                                StartCoroutine(MovePlayer());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        StartCoroutine(MovePlayer());
+                    }
                 }
             }
         }
@@ -109,7 +162,23 @@ public class PathNavigator : MonoBehaviour
             {
                 if (i == LevelNodeData.Direction.LEFT)
                 {
-                    Debug.Log("Left is available");
+                    IsMoving = true;
+                    int DirectionValue = (int)LevelNodeData.Direction.LEFT;
+                    if (CurrentLevel.IsPreviousPath.Count != 0)
+                    {
+                        foreach (var j in CurrentLevel.IsPreviousPath)
+                        {
+                            if (((int)j) == DirectionValue)
+                            {
+                                Progress = 1;
+                                StartCoroutine(MovePlayer());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        StartCoroutine(MovePlayer());
+                    }
                 }
             }
         }
@@ -120,7 +189,23 @@ public class PathNavigator : MonoBehaviour
             {
                 if (i == LevelNodeData.Direction.RIGHT)
                 {
-                    Debug.Log("Right is available");
+                    IsMoving = true;
+                    int DirectionValue = (int)LevelNodeData.Direction.RIGHT;
+                    if (CurrentLevel.IsPreviousPath.Count != 0)
+                    {
+                        foreach (var j in CurrentLevel.IsPreviousPath)
+                        {
+                            if (((int)j) == DirectionValue)
+                            {
+                                Progress = 1;
+                                StartCoroutine(MovePlayer());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        StartCoroutine(MovePlayer());
+                    }
                 }
             }
         }
@@ -130,8 +215,10 @@ public class PathNavigator : MonoBehaviour
     public void OnDirection(InputAction.CallbackContext Context)
     {
         DirectionInput = Context.ReadValue<Vector2>();
-        CheckDirection(DirectionInput);
-        //StartCoroutine(MovePlayer());
+        if (!IsMoving)
+        {
+            CheckDirection(DirectionInput);
+        }
     }
 
     public void OnConfirm(InputAction.CallbackContext Context)
