@@ -116,7 +116,18 @@ public class PathNavigator : MonoBehaviour
                         CurrentPath = CurrentLevel.ConnectedPaths[Index];
                         if (CurrentPath.Unlocked)
                         {
-                            StartCoroutine(MovePlayer());
+                            foreach (var j in CurrentLevel.IsPreviousPath)
+                            {
+                                if (((int)j) == DirectionValue)
+                                {
+                                    Progress = 1;
+                                    StartCoroutine(MovePlayer());
+                                }
+                                else
+                                {
+                                    StartCoroutine(MovePlayer());
+                                }
+                            }
                         }
                         else
                         {
@@ -170,7 +181,18 @@ public class PathNavigator : MonoBehaviour
                         CurrentPath = CurrentLevel.ConnectedPaths[Index];
                         if (CurrentPath.Unlocked)
                         {
-                            StartCoroutine(MovePlayer());
+                            foreach (var j in CurrentLevel.IsPreviousPath)
+                            {
+                                if (((int)j) == DirectionValue)
+                                {
+                                    Progress = 1;
+                                    StartCoroutine(MovePlayer());
+                                }
+                                else
+                                {
+                                    StartCoroutine(MovePlayer());
+                                }
+                            }
                         }
                         else
                         {
@@ -224,7 +246,18 @@ public class PathNavigator : MonoBehaviour
                         CurrentPath = CurrentLevel.ConnectedPaths[Index];
                         if (CurrentPath.Unlocked)
                         {
-                            StartCoroutine(MovePlayer());
+                            foreach(var j in CurrentLevel.IsPreviousPath)
+                            {
+                                if(((int)j) == DirectionValue)
+                                {
+                                    Progress = 1;
+                                    StartCoroutine(MovePlayer());
+                                }
+                                else
+                                {
+                                    StartCoroutine(MovePlayer());
+                                }
+                            }
                         }
                         else
                         {
@@ -278,7 +311,18 @@ public class PathNavigator : MonoBehaviour
                         CurrentPath = CurrentLevel.ConnectedPaths[Index];
                         if (CurrentPath.Unlocked)
                         {
-                            StartCoroutine(MovePlayer());
+                            foreach (var j in CurrentLevel.IsPreviousPath)
+                            {
+                                if (((int)j) == DirectionValue)
+                                {
+                                    Progress = 1;
+                                    StartCoroutine(MovePlayer());
+                                }
+                                else
+                                {
+                                    StartCoroutine(MovePlayer());
+                                }
+                            }
                         }
                         else
                         {
