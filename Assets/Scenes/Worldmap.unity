@@ -157,7 +157,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 5.24522, y: 0, z: -8.008883}
   - {x: 3, y: 0, z: 3.6749706}
-  - {x: 7.7661347, y: 0, z: 0}
+  - {x: 7.6534853, y: 0, z: 0}
 --- !u!4 &672026380
 Transform:
   m_ObjectHideFlags: 0
@@ -379,8 +379,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.1, z: 1}
-  m_Center: {x: -0.01718828, y: 0.11834988, z: -0.05201274}
+  m_Size: {x: 1, y: 0.20875837, z: 1}
+  m_Center: {x: -0.01718831, y: 0.06397069, z: -0.05201274}
 --- !u!23 &1609261821
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -438,7 +438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1609261819}
   m_LocalRotation: {x: -6.123234e-17, y: 1, z: 6.123234e-17, w: -3.7493994e-33}
-  m_LocalPosition: {x: 3.37, y: 0, z: 0}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -832,8 +832,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.1, z: 1}
-  m_Center: {x: -0.01718828, y: 0.11834988, z: -0.05201274}
+  m_Size: {x: 1, y: 0.20875837, z: 1}
+  m_Center: {x: -0.01718831, y: 0.06397069, z: -0.05201274}
 --- !u!4 &3453916862108616020
 Transform:
   m_ObjectHideFlags: 0
@@ -1106,8 +1106,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WaitBeforePathDecorating: 1
   WaitDisplayNextPathDecoration: 0.2
-  Frequency: 5
-  Spacing: 1
+  Frequency: 7
+  Spacing: 1.05
   DecorationItems:
   - {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   FirstTime: 1
@@ -1188,8 +1188,8 @@ MonoBehaviour:
   Unlocked: 1
   points:
   - {x: 0, y: 0, z: 0}
-  - {x: 4.3267145, y: 0, z: 0}
-  - {x: 3.8931937, y: 0, z: 7.6765995}
+  - {x: 5.9561787, y: 0, z: 0.0672521}
+  - {x: 3.8931937, y: 0, z: 7.9084525}
   - {x: -4.122095, y: 0, z: 6.39285}
 --- !u!33 &9088542395850329043
 MeshFilter:

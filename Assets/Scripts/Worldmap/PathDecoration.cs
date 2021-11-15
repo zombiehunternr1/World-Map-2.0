@@ -33,7 +33,7 @@ public class PathDecoration : MonoBehaviour
         {
             yield return new WaitForSeconds(WaitBeforePathDecorating);
         }
-        for (int p = 1, f = 0; f < Frequency; f++)
+        for (int p = 0, f = 0; f < Frequency; f++)
         {
             for (int i = 0; i < DecorationItems.Length; i++, p++)
             {
