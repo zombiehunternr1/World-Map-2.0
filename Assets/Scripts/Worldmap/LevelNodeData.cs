@@ -9,4 +9,12 @@ public class LevelNodeData : MonoBehaviour
     public List<PathLayout> ConnectedPaths;
     public List<Direction> IsPreviousPath;
     public LevelData LevelInfo;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.GetComponent<PathNavigator>())
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }
