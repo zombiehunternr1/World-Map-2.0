@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9757a81c261bea9469de37dd88f4b402, type: 3}
   m_Name: Level 3
   m_EditorClassIdentifier: 
-  LevelNumber: 3
-  LevelName: Third Level
+  levelNumber: 3
+  levelName: Third level

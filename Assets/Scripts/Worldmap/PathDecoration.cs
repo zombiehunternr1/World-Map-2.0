@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PathDecoration : MonoBehaviour
 {
-    public int WaitBeforePathDecorating = 3;
-    public float WaitDisplayNextPathDecoration;
-    public int Frequency;
-    public float Spacing = 1;
-    public Transform[] DecorationItems;
+    public int waitBeforePathDecorating = 3;
+    public float waitDisplayNextPathDecoration;
+    public int frequency;
+    public float spacing = 1;
+    public Transform pathDecorTransform;
     //[HideInInspector]
-    public bool FirstTime = true;
-    private PathLayout PathToDecorate;
+    public bool firstTime = true;
+    private PathLayout pathToDecorate;
 
     private void Start()
     {
-        PathToDecorate = GetComponent<PathLayout>();
-        if (PathToDecorate.Unlocked)
+        pathToDecorate = GetComponent<PathLayout>();
+        if (pathToDecorate.unlocked)
         {
             StartCoroutine(DecoratePath());
         }
@@ -24,33 +24,34 @@ public class PathDecoration : MonoBehaviour
 
     private IEnumerator DecoratePath()
     {
-        if (Frequency <= 0 || DecorationItems == null || DecorationItems.Length == 0)
+        if (frequency <= 0 || pathDecorTransform == null)
         {
             yield return null;
         }
-        float StepSize = Spacing / (Frequency * DecorationItems.Length);
-        if (FirstTime)
+        float stepSize = spacing / (frequency * spacing);
+        if (firstTime)
         {
-            yield return new WaitForSeconds(WaitBeforePathDecorating);
+            yield return new WaitForSeconds(waitBeforePathDecorating);
         }
-        for (int p = 0, f = 0; f < Frequency; f++)
+        for (int p = 1, f = 0; f < frequency; f++)
         {
-            for (int i = 0; i < DecorationItems.Length; i++, p++)
+            for(int i = 0; i < spacing; i++, p++)
             {
-                Transform PathDecorationItem = Instantiate(DecorationItems[i]) as Transform;
-                Vector3 Position = PathToDecorate.GetPoint(p * StepSize);
+                Transform PathDecorationItem = Instantiate(pathDecorTransform) as Transform;
+                Vector3 Position = pathToDecorate.GetPoint(p * stepSize);
                 PathDecorationItem.transform.localPosition = Position;
-                PathDecorationItem.transform.LookAt(Position + PathToDecorate.GetDirection(p * StepSize));
+                PathDecorationItem.transform.LookAt(Position + pathToDecorate.GetDirection(p * stepSize));
                 PathDecorationItem.transform.parent = gameObject.transform;
-                if (FirstTime)
+                if (firstTime)
                 {
-                    yield return new WaitForSeconds(WaitDisplayNextPathDecoration);
+                    yield return new WaitForSeconds(waitDisplayNextPathDecoration);
                 }
                 else
                 {
                     yield return null;
                 }
-            }
+            }          
         }
+        firstTime = false;
     }
 }

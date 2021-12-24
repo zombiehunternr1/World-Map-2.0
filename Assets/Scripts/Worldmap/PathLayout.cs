@@ -2,7 +2,7 @@
 
 public class PathLayout : MonoBehaviour {
 
-	public bool Unlocked;
+	public bool unlocked;
 	public Vector3[] points;
 
 	public Vector3 GetPoint (float t) {
