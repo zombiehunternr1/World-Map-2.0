@@ -484,7 +484,6 @@ GameObject:
   - component: {fileID: 344922873}
   - component: {fileID: 344922872}
   - component: {fileID: 344922871}
-  - component: {fileID: 344922870}
   m_Layer: 0
   m_Name: Level 3
   m_TagString: Untagged
@@ -492,19 +491,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &344922870
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 344922869}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.20875837, z: 1}
-  m_Center: {x: -0.01718831, y: 0.06397069, z: -0.05201274}
 --- !u!114 &344922871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,7 +964,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &705507996
 MonoBehaviour:
@@ -1737,7 +1723,7 @@ MonoBehaviour:
   - {fileID: 5865931778445876734}
   - {fileID: 672026379}
   isPreviousPath: 
-  levelInfo: {fileID: 0}
+  levelInfo: {fileID: 11400000, guid: 15c19c5c75cdd564eadf2a6e11bd7f9d, type: 2}
 --- !u!4 &1603058734983493528
 Transform:
   m_ObjectHideFlags: 0
@@ -1751,7 +1737,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122573943879986466
 GameObject:
