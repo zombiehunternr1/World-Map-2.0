@@ -509,6 +509,7 @@ MonoBehaviour:
   - {fileID: 5865931778445876734}
   isPreviousPath: 0300000004000000
   levelInfo: {fileID: 11400000, guid: eeff4f398f9909646bb116a8983beb74, type: 2}
+  levelNodeMat: {fileID: 0}
 --- !u!65 &344922872
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -626,6 +627,7 @@ MonoBehaviour:
   - {fileID: 672026379}
   isPreviousPath: 04000000
   levelInfo: {fileID: 11400000, guid: 5975d93b1ecb7e447aca1cc434921c11, type: 2}
+  levelNodeMat: {fileID: 0}
 --- !u!65 &574666521
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -769,11 +771,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitBeforePathDecorating: 3
-  waitDisplayNextPathDecoration: 2
+  waitDisplayNextPathDecoration: 0.7
   frequency: 4
+  skipAmount: 2
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   firstTime: 1
+  levelToUnlock: {fileID: 574666520}
 --- !u!1 &697064377
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,6 +1728,7 @@ MonoBehaviour:
   - {fileID: 672026379}
   isPreviousPath: 
   levelInfo: {fileID: 11400000, guid: 15c19c5c75cdd564eadf2a6e11bd7f9d, type: 2}
+  levelNodeMat: {fileID: 0}
 --- !u!4 &1603058734983493528
 Transform:
   m_ObjectHideFlags: 0
@@ -2972,9 +2977,11 @@ MonoBehaviour:
   waitBeforePathDecorating: 3
   waitDisplayNextPathDecoration: 2
   frequency: 8
+  skipAmount: 0
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   firstTime: 1
+  levelToUnlock: {fileID: 344922871}
 --- !u!114 &5865931778445876734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2987,7 +2994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b6b4e22427e4efbb847bd026324e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 1
+  unlocked: 0
   points:
   - {x: 0, y: 0, z: 0}
   - {x: -0.081204414, y: 0, z: 8.67441}
@@ -3049,9 +3056,11 @@ MonoBehaviour:
   waitBeforePathDecorating: 3
   waitDisplayNextPathDecoration: 2
   frequency: 6
+  skipAmount: 0
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   firstTime: 1
+  levelToUnlock: {fileID: 344922871}
 --- !u!4 &7952163643253737454
 Transform:
   m_ObjectHideFlags: 0
@@ -3111,7 +3120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b6b4e22427e4efbb847bd026324e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 1
+  unlocked: 0
   points:
   - {x: 0, y: 0, z: 0}
   - {x: 5.9561787, y: 0, z: 0.0672521}
