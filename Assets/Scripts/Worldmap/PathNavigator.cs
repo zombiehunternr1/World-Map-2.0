@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using TMPro;
 
 public class PathNavigator : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class PathNavigator : MonoBehaviour
     private LevelNodeData currentLevel;
     private float progress;
     private bool isMoving;
+
+    //UI references
+    [SerializeField]
+    TextMeshProUGUI levelNumber;
+    [SerializeField]
+    TextMeshProUGUI levelName;
 
     //Player input
     private Vector2 directionInput;
@@ -380,8 +387,14 @@ public class PathNavigator : MonoBehaviour
         StartCoroutine(PositionPlayerOnLevel(other.transform));
         StartCoroutine(DelayEnableMoving());
         currentLevel = other.GetComponent<LevelNodeData>();
-        Debug.Log(currentLevel.levelInfo.levelName);
-        Debug.Log(currentLevel.levelInfo.levelNumber);
+        levelNumber.text = "Level: " + currentLevel.levelInfo.levelNumber;
+        levelName.text = currentLevel.levelInfo.levelName;
+    }
+
+    private void OnTriggerExit()
+    {
+        levelNumber.text = "Level: ";
+        levelName.text = "";
     }
 
     #region Inputsystem
