@@ -14,6 +14,7 @@ public class PathNavigator : MonoBehaviour
     public float positioningSpeed;
     public bool isMoving;
 
+    public Animator playerAnimator;
     private Vector3 currentPosition;
     public LevelNodeData currentLevel;
 
@@ -303,6 +304,7 @@ public class PathNavigator : MonoBehaviour
 
     private IEnumerator MovePlayer()
     {
+        playerAnimator.Play("Run");
         if (progress < 1)
         {
             while (progress < 1f)
@@ -342,12 +344,23 @@ public class PathNavigator : MonoBehaviour
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, LevelPosition.position, Time.deltaTime * positioningSpeed);
             yield return transform.localPosition;
         }
-        while (transform.localRotation != Quaternion.Euler(0, 180, 0))
+        if(transform.localRotation.y > 0)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * positioningSpeed);
-            yield return transform.localRotation;
+            while (transform.localRotation != Quaternion.Euler(0, 180, 0))
+            {
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * positioningSpeed);
+                yield return transform.localRotation;
+            }
         }
-        transform.localRotation = Quaternion.Euler(0, 180, 0);
+        if(transform.localRotation.y < 0)
+        {
+            while (transform.localRotation != Quaternion.Euler(0, -180, 0))
+            {
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * positioningSpeed);
+                yield return transform.localRotation;
+            }
+        }
+        playerAnimator.Play("Idle");
         StopCoroutine(PositionPlayerOnLevel(LevelPosition));
     }
     #endregion
