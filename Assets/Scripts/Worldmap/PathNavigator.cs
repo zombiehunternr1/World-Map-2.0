@@ -346,7 +346,7 @@ public class PathNavigator : MonoBehaviour
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, LevelPosition.position, Time.deltaTime * positioningSpeedOnLevelNode);
             yield return transform.localPosition;
         }
-        if(transform.localRotation.y > 0)
+        if(transform.localRotation.y >= 0)
         {
             while (transform.localRotation != Quaternion.Euler(0, 180, 0))
             {
@@ -354,7 +354,7 @@ public class PathNavigator : MonoBehaviour
                 yield return transform.localRotation;
             }
         }
-        if(transform.localRotation.y < 0)
+        if(transform.localRotation.y <= 0)
         {
             while (transform.localRotation != Quaternion.Euler(0, -180, 0))
             {
