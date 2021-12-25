@@ -7,20 +7,25 @@ using System;
 public class PathNavigator : MonoBehaviour
 {
     #region Variables
-    //Navigation
-    public PathLayout currentPath;
-    public float duration;
-    public float progress;
-    public float positioningSpeed;
-    public bool isMoving;
-
-    public Animator playerAnimator;
+    //Speed variables
+    public float positioningSpeedOnPath;
+    public float positioningSpeedOnLevelNode;
+    
+    //Reference and positioning variables
+    [SerializeField]
+    private PathLayout currentPath;
+    [SerializeField]
+    private Animator playerAnimator; //Not needed to implement until after cube tutorial explanation is done
+    [SerializeField]
+    private float enableMovementCooldown;
     private Vector3 currentPosition;
-    public LevelNodeData currentLevel;
+    private LevelNodeData currentLevel;
+    private float progress;
+    private bool isMoving;
 
     //Player input
-    public Vector2 directionInput;
-    public bool confirm;
+    private Vector2 directionInput;
+    private bool confirm;
     #endregion
 
     private void Start()
@@ -31,11 +36,8 @@ public class PathNavigator : MonoBehaviour
     #region PlayerMovement
     private void PositionPlayerOnCurve()
     {
-        if (currentPath != null)
-        {
-            currentPosition = currentPath.GetPoint(progress);
-            transform.localPosition = currentPosition;
-        }
+        currentPosition = currentPath.GetPoint(progress);
+        transform.localPosition = currentPosition;
     }
 
     private void CheckDirection(Vector2 SelectedDirection)
@@ -304,12 +306,12 @@ public class PathNavigator : MonoBehaviour
 
     private IEnumerator MovePlayer()
     {
-        playerAnimator.Play("Run");
+        playerAnimator.Play("Run"); //Not needed to implement until after cube tutorial explanation is done
         if (progress < 1)
         {
             while (progress < 1f)
             {
-                progress += Time.deltaTime / duration;
+                progress += Time.deltaTime / positioningSpeedOnPath;
                 if (progress > 1f)
                 {
                     progress = 1f;
@@ -324,7 +326,7 @@ public class PathNavigator : MonoBehaviour
         {
             while (progress > 0)
             {
-                progress -= Time.deltaTime / duration;
+                progress -= Time.deltaTime / positioningSpeedOnPath;
                 if (progress < 0)
                 {
                     progress = 0;
@@ -341,14 +343,14 @@ public class PathNavigator : MonoBehaviour
     {
         while (transform.localPosition != LevelPosition.position)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, LevelPosition.position, Time.deltaTime * positioningSpeed);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, LevelPosition.position, Time.deltaTime * positioningSpeedOnLevelNode);
             yield return transform.localPosition;
         }
         if(transform.localRotation.y > 0)
         {
             while (transform.localRotation != Quaternion.Euler(0, 180, 0))
             {
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * positioningSpeed);
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * positioningSpeedOnLevelNode);
                 yield return transform.localRotation;
             }
         }
@@ -356,12 +358,19 @@ public class PathNavigator : MonoBehaviour
         {
             while (transform.localRotation != Quaternion.Euler(0, -180, 0))
             {
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * positioningSpeed);
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, Quaternion.Euler(0, -180, 0), Time.deltaTime * positioningSpeedOnLevelNode);
                 yield return transform.localRotation;
             }
         }
-        playerAnimator.Play("Idle");
+        playerAnimator.Play("Idle"); //Not needed to implement until after cube tutorial explanation is done
         StopCoroutine(PositionPlayerOnLevel(LevelPosition));
+    }
+
+    private IEnumerator DelayEnableMoving()
+    {
+        yield return new WaitForSeconds(enableMovementCooldown);
+        isMoving = false;
+        progress = 0;
     }
     #endregion
 
@@ -369,9 +378,8 @@ public class PathNavigator : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(PositionPlayerOnLevel(other.transform));
+        StartCoroutine(DelayEnableMoving());
         currentLevel = other.GetComponent<LevelNodeData>();
-        isMoving = false;
-        progress = 0;
         Debug.Log(currentLevel.levelInfo.levelName);
         Debug.Log(currentLevel.levelInfo.levelNumber);
     }

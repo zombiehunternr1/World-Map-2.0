@@ -747,15 +747,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd72a44fe8c80b4885e65d9d02a4dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positioningSpeedOnPath: 2
+  positioningSpeedOnLevelNode: 4
   currentPath: {fileID: 672026379}
-  duration: 2
-  progress: 0
-  positioningSpeed: 4
-  isMoving: 0
   playerAnimator: {fileID: 2935908556719135153}
-  currentLevel: {fileID: 0}
-  directionInput: {x: 0, y: 0}
-  confirm: 0
+  enableMovementCooldown: 0.75
 --- !u!114 &2052383202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,7 +1015,7 @@ MonoBehaviour:
   connectedPaths:
   - {fileID: 8339325092053616077}
   - {fileID: 5865931778445876734}
-  isPreviousPath: 04000000
+  isPreviousPath: 0300000004000000
   levelInfo: {fileID: 11400000, guid: eeff4f398f9909646bb116a8983beb74, type: 2}
 --- !u!33 &1747709481102887665
 MeshFilter:
@@ -1041,7 +1037,7 @@ GameObject:
   - component: {fileID: 872322451955049073}
   - component: {fileID: 226109367911313492}
   m_Layer: 0
-  m_Name: ' Cube model'
+  m_Name: Cube model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
