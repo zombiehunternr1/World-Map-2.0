@@ -2975,9 +2975,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitBeforePathDecorating: 3
-  waitDisplayNextPathDecoration: 2
-  frequency: 8
-  skipAmount: 0
+  waitDisplayNextPathDecoration: 0.7
+  frequency: 3
+  skipAmount: 1
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   firstTime: 1
@@ -2997,9 +2997,9 @@ MonoBehaviour:
   unlocked: 0
   points:
   - {x: 0, y: 0, z: 0}
-  - {x: -0.081204414, y: 0, z: 8.67441}
-  - {x: -0.6415658, y: 0, z: 5.8645897}
-  - {x: 4.3706217, y: 0, z: 6.606981}
+  - {x: 0, y: 0, z: 2}
+  - {x: -1, y: 0, z: 6.5217943}
+  - {x: 4, y: 0, z: 6.4999714}
 --- !u!4 &6581753075995798640
 Transform:
   m_ObjectHideFlags: 0
@@ -3054,9 +3054,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitBeforePathDecorating: 3
-  waitDisplayNextPathDecoration: 2
+  waitDisplayNextPathDecoration: 0.7
   frequency: 6
-  skipAmount: 0
+  skipAmount: 1
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   firstTime: 1
