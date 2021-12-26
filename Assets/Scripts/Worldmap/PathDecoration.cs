@@ -18,6 +18,10 @@ public class PathDecoration : MonoBehaviour
 
     private void Start()
     {
+        if (firstTime)
+        {
+            levelToUnlock.levelNodeMat.color = Color.red;
+        }
         pathToDecorate = GetComponent<PathLayout>();
         if (pathToDecorate.unlocked)
         {
@@ -43,25 +47,26 @@ public class PathDecoration : MonoBehaviour
                 if (p < skipAmount)
                 {
                     yield return null;
-                }
-                else if (p == frequency)
+                }               
+                else if (p == frequency - 1)
                 {
-                    Debug.Log("Last one");
+                    PlacePathDecoration(p, stepSize);
                     if (firstTime)
                     {
+                        yield return new WaitForSeconds(waitDisplayNextPathDecoration);
                         PathNavigator.canMove = true;
                         firstTime = false;
                         levelToUnlock.levelNodeMat.color = Color.green;
+                    }
+                    else
+                    {
+                        PathNavigator.canMove = true;
                     }
                     StopAllCoroutines();
                 }
                 else
                 {
-                    Transform PathDecorationItem = Instantiate(pathDecorTransform) as Transform;
-                    Vector3 Position = pathToDecorate.GetPoint(p * stepSize);
-                    PathDecorationItem.transform.localPosition = Position;
-                    PathDecorationItem.transform.LookAt(Position + pathToDecorate.GetDirection(p * stepSize));
-                    PathDecorationItem.transform.parent = gameObject.transform;
+                    PlacePathDecoration(p, stepSize);
                 }
                 if (firstTime)
                 {
@@ -73,5 +78,14 @@ public class PathDecoration : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void PlacePathDecoration(float pathPoint, float stepSize)
+    {
+        Transform pathDecorationItem = Instantiate(pathDecorTransform) as Transform;
+        Vector3 position = pathToDecorate.GetPoint(pathPoint * stepSize);
+        pathDecorationItem.transform.localPosition = position;
+        pathDecorationItem.transform.LookAt(position + pathToDecorate.GetDirection(pathPoint * stepSize));
+        pathDecorationItem.transform.parent = gameObject.transform;
     }
 }

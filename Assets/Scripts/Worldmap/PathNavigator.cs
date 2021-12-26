@@ -376,7 +376,7 @@ public class PathNavigator : MonoBehaviour
     private IEnumerator DelayEnableMoving()
     {
         yield return new WaitForSeconds(enableMovementCooldown);
-        canMove = false;
+        canMove = true;
         progress = 0;
     }
     #endregion
