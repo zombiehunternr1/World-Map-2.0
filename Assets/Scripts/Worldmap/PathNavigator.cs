@@ -40,6 +40,11 @@ public class PathNavigator : MonoBehaviour
         PositionPlayerOnCurve();
     }
 
+    private void Update()
+    {
+        Debug.Log(canMove);
+    }
+
     #region PlayerMovement
     private void PositionPlayerOnCurve()
     {

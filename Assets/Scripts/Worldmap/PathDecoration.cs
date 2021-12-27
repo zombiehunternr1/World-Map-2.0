@@ -60,7 +60,7 @@ public class PathDecoration : MonoBehaviour
                     }
                     else
                     {
-                        PathNavigator.canMove = true;
+                        levelToUnlock.levelNodeMat.color = Color.green;
                     }
                     StopAllCoroutines();
                 }
