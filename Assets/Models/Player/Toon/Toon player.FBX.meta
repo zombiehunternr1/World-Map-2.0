@@ -2747,12 +2747,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: TT_demo
-    second: {fileID: 2100000, guid: 8fd192304df88db499eedb3456dc6d67, type: 2}
+    second: {fileID: 2100000, guid: 6430151c2d06d6f429fbf0489d303f80, type: 2}
   materials:
     materialImportMode: 1
     materialName: 1
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

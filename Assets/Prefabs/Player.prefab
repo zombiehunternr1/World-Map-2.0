@@ -298,6 +298,9 @@ MonoBehaviour:
   currentPath: {fileID: 0}
   playerAnimator: {fileID: 8864622952974174999}
   enableMovementCooldown: 0.75
+  levelNumber: {fileID: 0}
+  levelName: {fileID: 0}
+  levelEnterContainer: {fileID: 0}
 --- !u!65 &6033423673692402502
 BoxCollider:
   m_ObjectHideFlags: 0

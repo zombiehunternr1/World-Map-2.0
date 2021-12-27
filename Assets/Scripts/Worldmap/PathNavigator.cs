@@ -422,6 +422,15 @@ public class PathNavigator : MonoBehaviour
             confirm = Context.ReadValueAsButton();
             levelEnterInfo.text = "Now entering level: " + currentLevel.levelInfo.levelNumber;
             levelEnterContainer.gameObject.SetActive(true);
+            if(transform.localRotation.y > 0)
+            {
+                transform.localRotation = Quaternion.Euler(0, 180, 0);
+            }
+            if(transform.localRotation.y < 0)
+            {
+                transform.localRotation = Quaternion.Euler(0, -180, 0);
+            }
+            playerAnimator.Play("Enter");
         }
     }
     #endregion
