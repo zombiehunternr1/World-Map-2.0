@@ -26,9 +26,12 @@ public class PathNavigator : MonoBehaviour
 
     //UI references
     [SerializeField]
-    TextMeshProUGUI levelNumber;
+    private TextMeshProUGUI levelNumber;
     [SerializeField]
-    TextMeshProUGUI levelName;
+    private TextMeshProUGUI levelName;
+    [SerializeField]
+    private RectTransform levelEnterContainer;
+    private TextMeshProUGUI levelEnterInfo;
 
     //Player input
     private Vector2 directionInput;
@@ -37,6 +40,7 @@ public class PathNavigator : MonoBehaviour
 
     private void Start()
     {
+        levelEnterInfo = levelEnterContainer.GetComponentInChildren<TextMeshProUGUI>();
         PositionPlayerOnCurve();
     }
 
@@ -398,6 +402,7 @@ public class PathNavigator : MonoBehaviour
     {
         levelNumber.text = "Level: ";
         levelName.text = "";
+        levelEnterContainer.gameObject.SetActive(false);
     }
 
     #region Inputsystem
@@ -413,6 +418,8 @@ public class PathNavigator : MonoBehaviour
     public void OnConfirm(InputAction.CallbackContext Context)
     {
         confirm = Context.ReadValueAsButton();
+        levelEnterInfo.text = "Now entering level: " + currentLevel.levelInfo.levelNumber;
+        levelEnterContainer.gameObject.SetActive(true);
     }
     #endregion
 }
