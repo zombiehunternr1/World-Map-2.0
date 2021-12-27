@@ -417,9 +417,12 @@ public class PathNavigator : MonoBehaviour
 
     public void OnConfirm(InputAction.CallbackContext Context)
     {
-        confirm = Context.ReadValueAsButton();
-        levelEnterInfo.text = "Now entering level: " + currentLevel.levelInfo.levelNumber;
-        levelEnterContainer.gameObject.SetActive(true);
+        if (canMove)
+        {
+            confirm = Context.ReadValueAsButton();
+            levelEnterInfo.text = "Now entering level: " + currentLevel.levelInfo.levelNumber;
+            levelEnterContainer.gameObject.SetActive(true);
+        }
     }
     #endregion
 }
