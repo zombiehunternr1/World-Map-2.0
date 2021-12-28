@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class PathDecoration : MonoBehaviour
 {
-    public int waitBeforePathDecorating = 3;
-    public float waitDisplayNextPathDecoration;
-    public int frequency;
-    public int skipAmount;
-    public float spacing = 1;
-    public Transform pathDecorTransform;
-    //[HideInInspector]
+    [HideInInspector]
     public bool firstTime = true;
-    private PathLayout pathToDecorate;
+    [SerializeField]
+    private int waitBeforePathDecorating = 3;
+    [SerializeField]
+    private float waitDisplayNextPathDecoration;
+    [SerializeField]
+    private int frequency;
+    [SerializeField]
+    private int skipAmount;
+    [SerializeField]
+    private float spacing = 1;
+    [SerializeField]
+    private Transform pathDecorTransform;
     [SerializeField]
     private LevelNodeData levelToUnlock;
-
+    private PathLayout pathToDecorate;
     private void Start()
     {
         if (firstTime)

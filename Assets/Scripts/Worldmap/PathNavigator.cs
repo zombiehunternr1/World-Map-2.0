@@ -9,8 +9,10 @@ public class PathNavigator : MonoBehaviour
 {
     #region Variables
     //Speed variables
-    public float positioningSpeedOnPath;
-    public float positioningSpeedOnLevelNode;
+    [SerializeField]
+    private float positioningSpeedOnPath;
+    [SerializeField]
+    private float positioningSpeedOnLevelNode;
 
     //Reference and positioning variables
     public static bool canMove;
@@ -420,7 +422,7 @@ public class PathNavigator : MonoBehaviour
         if (canMove)
         {
             confirm = Context.ReadValueAsButton();
-            levelEnterInfo.text = "Now entering level: " + currentLevel.levelInfo.levelNumber;
+            levelEnterInfo.text = "Now entering level " + currentLevel.levelInfo.levelNumber;
             levelEnterContainer.gameObject.SetActive(true);
             if(transform.localRotation.y > 0)
             {
