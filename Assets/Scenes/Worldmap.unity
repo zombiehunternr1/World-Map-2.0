@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathsInWorld: []
+  worldDataContainer: {fileID: 11400000, guid: a0f2c0d35f5e01340bcc4345483d2867, type: 2}
 --- !u!1 &51997320
 GameObject:
   m_ObjectHideFlags: 0
@@ -785,7 +786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b6b4e22427e4efbb847bd026324e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 1
+  pathInfo: {fileID: 11400000, guid: 3fc2e735c1469b04c80fa3e67b15ef68, type: 2}
+  unlocked: 0
   points:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -818,13 +820,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619a8d0ad3919464e8af4ba8d3b9b293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstTime: 0
   waitBeforePathDecorating: 3
   waitDisplayNextPathDecoration: 0.7
   frequency: 4
   skipAmount: 2
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
-  firstTime: 1
   levelToUnlock: {fileID: 574666520}
 --- !u!1 &705507993
 GameObject:
@@ -3080,13 +3082,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619a8d0ad3919464e8af4ba8d3b9b293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstTime: 0
   waitBeforePathDecorating: 3
   waitDisplayNextPathDecoration: 0.7
   frequency: 3
   skipAmount: 1
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
-  firstTime: 0
   levelToUnlock: {fileID: 344922871}
 --- !u!114 &5865931778445876734
 MonoBehaviour:
@@ -3100,7 +3102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b6b4e22427e4efbb847bd026324e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlocked: 1
+  pathInfo: {fileID: 11400000, guid: 87f3b15c74ae92f47a43f4102dbb354b, type: 2}
+  unlocked: 0
   points:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 2}
@@ -3159,13 +3162,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619a8d0ad3919464e8af4ba8d3b9b293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstTime: 0
   waitBeforePathDecorating: 3
   waitDisplayNextPathDecoration: 0.7
   frequency: 6
   skipAmount: 1
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
-  firstTime: 1
   levelToUnlock: {fileID: 344922871}
 --- !u!4 &7952163643253737454
 Transform:
@@ -3226,6 +3229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b6b4e22427e4efbb847bd026324e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathInfo: {fileID: 11400000, guid: 5c3e9ece3699200469d7363f4e81fa96, type: 2}
   unlocked: 0
   points:
   - {x: 0, y: 0, z: 0}

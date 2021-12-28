@@ -6,6 +6,8 @@ public class PathManager : MonoBehaviour
 {
     [SerializeField]
     private List<PathLayout> pathsInWorld;
+    [SerializeField]
+    private WorldData worldDataContainer;
 
     private void OnEnable()
     {
@@ -16,21 +18,49 @@ public class PathManager : MonoBehaviour
         {
             pathsInWorld.Add(path);
         }
-        CheckFirstTimeUnlocked();
+        CheckAlreadyUnlockedPaths();
     }
 
+    private void CheckAlreadyUnlockedPaths()
+    {
+        for(int i = 0; i < worldDataContainer.pathsInWorld.Count; i++)
+        {
+            if (worldDataContainer.pathsInWorld[i].unlocked)
+            {
+                if (worldDataContainer.pathsInWorld[i].firstTime == false)
+                {
+                    pathsInWorld[i].unlocked = worldDataContainer.pathsInWorld[i].unlocked;
+                    pathsInWorld[i].GetComponent<PathDecoration>().firstTime = worldDataContainer.pathsInWorld[i].firstTime;
+                }
+                else
+                {
+                    PathDecoration pathDecor = pathsInWorld[i].GetComponent<PathDecoration>();
+                    pathDecor.firstTime = worldDataContainer.pathsInWorld[i].firstTime;
+                    pathsInWorld[i].unlocked = worldDataContainer.pathsInWorld[i].unlocked;
+                    pathDecor.StartCoroutine(pathDecor.DecoratePath());
+                }
+            }
+        }
+        CheckFirstTimeUnlocked();
+    }
     private void CheckFirstTimeUnlocked()
     {
-        for(int i = 0; i < pathsInWorld.Count; i++)
+        for (int i = 0; i < pathsInWorld.Count; i++)
         {
             if (pathsInWorld[i].unlocked)
             {
                 if (pathsInWorld[i].GetComponent<PathDecoration>().firstTime)
                 {
                     PathNavigator.canMove = false;
+                    worldDataContainer.pathsInWorld[i].unlocked = true;
                     return;
                 }
             }
         }
+    }
+    public void UpdateUnlockedStatus(PathData path, bool firstTimeUnlocked)
+    {
+        path.unlocked = true;
+        path.firstTime = firstTimeUnlocked;
     }
 }

@@ -21,20 +21,19 @@ public class PathDecoration : MonoBehaviour
     [SerializeField]
     private LevelNodeData levelToUnlock;
     private PathLayout pathToDecorate;
+    private PathManager pathManager;
     private void Start()
     {
-        if (firstTime)
-        {
-            levelToUnlock.levelNodeMat.color = Color.red;
-        }
+        levelToUnlock.levelNodeMat.color = Color.red;
         pathToDecorate = GetComponent<PathLayout>();
+        pathManager = GetComponentInParent<PathManager>();
         if (pathToDecorate.unlocked)
         {
             StartCoroutine(DecoratePath());
         }
     }
 
-    private IEnumerator DecoratePath()
+    public IEnumerator DecoratePath()
     {
         if (frequency <= 0 || pathDecorTransform == null)
         {
@@ -61,6 +60,7 @@ public class PathDecoration : MonoBehaviour
                         yield return new WaitForSeconds(waitDisplayNextPathDecoration);
                         PathNavigator.canMove = true;
                         firstTime = false;
+                        pathManager.UpdateUnlockedStatus(pathToDecorate.pathInfo, firstTime);
                         levelToUnlock.levelNodeMat.color = Color.green;
                     }
                     else
