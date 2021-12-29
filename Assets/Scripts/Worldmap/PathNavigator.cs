@@ -32,17 +32,14 @@ public class PathNavigator : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI levelName;
     [SerializeField]
-    private RectTransform levelEnterContainer;
     private TextMeshProUGUI levelEnterInfo;
 
     //Player input
     private Vector2 directionInput;
-    private bool confirm;
     #endregion
 
     private void Start()
     {
-        levelEnterInfo = levelEnterContainer.GetComponentInChildren<TextMeshProUGUI>();
         PositionPlayerOnCurve();
     }
 
@@ -376,14 +373,10 @@ public class PathNavigator : MonoBehaviour
             }
         }
         playerAnimator.Play("Idle"); //Not needed to implement until after cube tutorial explanation is done
-        StopCoroutine(PositionPlayerOnLevel(LevelPosition));
-    }
-
-    private IEnumerator DelayEnableMoving()
-    {
-        yield return new WaitForSeconds(enableMovementCooldown);
-        canMove = true;
+        yield return new WaitForSeconds(0.5f);
         progress = 0;
+        canMove = true;
+        StopCoroutine(PositionPlayerOnLevel(LevelPosition));
     }
     #endregion
 
@@ -391,10 +384,6 @@ public class PathNavigator : MonoBehaviour
     {
         StopAllCoroutines();
         StartCoroutine(PositionPlayerOnLevel(other.transform));
-        if (!currentPath.GetComponent<PathDecoration>().firstTime)
-        {
-            StartCoroutine(DelayEnableMoving());
-        }
         currentLevel = other.GetComponent<LevelNodeData>();
         levelNumber.text = "Level: " + currentLevel.levelInfo.levelNumber;
         levelName.text = currentLevel.levelInfo.levelName;
@@ -404,27 +393,26 @@ public class PathNavigator : MonoBehaviour
     {
         levelNumber.text = "Level: ";
         levelName.text = "";
-        levelEnterContainer.gameObject.SetActive(false);
+        SceneManager.Instance.ToggleEnterLevelInfo(false);
     }
 
     #region Inputsystem
     public void OnDirection(InputAction.CallbackContext Context)
     {
         directionInput = Context.ReadValue<Vector2>();
-        if (canMove)
+        if (canMove && SceneManager.Instance.allowInteraction)
         {
             CheckDirection(directionInput);
         }
     }
 
-    public void OnConfirm(InputAction.CallbackContext Context)
+    public void OnConfirm()
     {
-        if (canMove)
+        if (canMove && SceneManager.Instance.allowInteraction)
         {
-            confirm = Context.ReadValueAsButton();
-            levelEnterInfo.text = "Now entering level " + currentLevel.levelInfo.levelNumber;
-            levelEnterContainer.gameObject.SetActive(true);
-            if(transform.localRotation.y > 0)
+            canMove = false;
+            SceneManager.Instance.SceneTransition(true);
+            if (transform.localRotation.y > 0)
             {
                 transform.localRotation = Quaternion.Euler(0, 180, 0);
             }
@@ -432,6 +420,8 @@ public class PathNavigator : MonoBehaviour
             {
                 transform.localRotation = Quaternion.Euler(0, -180, 0);
             }
+            levelEnterInfo.text = "Now entering level " + currentLevel.levelInfo.levelNumber;
+            SceneManager.Instance.ToggleEnterLevelInfo(true);
             playerAnimator.Play("Enter");
         }
     }

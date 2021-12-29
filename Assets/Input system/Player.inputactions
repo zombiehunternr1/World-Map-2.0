@@ -11,7 +11,8 @@
                     "id": "f594198b-3c0a-4bb7-8e11-32161134b059",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Confirming",
@@ -19,7 +20,8 @@
                     "id": "b9f56e5f-4795-4600-9892-70aeacbaaf8c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press"
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [

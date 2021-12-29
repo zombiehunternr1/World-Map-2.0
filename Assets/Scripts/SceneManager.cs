@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
+    public static SceneManager Instance;
+    
+    [HideInInspector]
+    public bool allowInteraction;
     [SerializeField]
     private bool isFadingBlack;
     private float fadeAmount;
@@ -13,41 +17,61 @@ public class SceneManager : MonoBehaviour
     private float fadeSpeed;
     [SerializeField]
     private Image fadePanel;
+    [SerializeField]
+    private RectTransform levelEnterContainer;
+    private float waitAmount = 1;
 
-    public void SceneTransition()
+    private void OnEnable()
     {
-        StartCoroutine(FadeEffect());
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        StartCoroutine(FadeEffect(isFadingBlack));
     }
 
-    private void Start()
+    public void SceneTransition(bool isFadingBlack)
     {
-        StartCoroutine(FadeEffect());
+        StartCoroutine(FadeEffect(isFadingBlack));
     }
 
-    private IEnumerator FadeEffect()
+    public void ToggleEnterLevelInfo(bool toggle)
     {
+        levelEnterContainer.gameObject.SetActive(toggle);
+    }
+
+    private IEnumerator FadeEffect(bool isFadingBlack)
+    {
+        yield return new WaitForSeconds(waitAmount);
         Color panelColor = fadePanel.color;
         if (isFadingBlack)
         {
-            while(fadePanel.color.a < 1)
+            allowInteraction = false;
+            while (fadePanel.color.a < 1)
             {
                 fadeAmount = panelColor.a + (fadeSpeed * Time.deltaTime);
                 panelColor = new Color(panelColor.r, panelColor.g, panelColor.b, fadeAmount);
                 fadePanel.color = panelColor;
                 yield return null;
             }
-            Debug.Log("I'm black");
+            yield return new WaitForSeconds(0.5f);
+            ToggleEnterLevelInfo(allowInteraction);
+            StartCoroutine(FadeEffect(allowInteraction));
         }
         else
         {
-            while(fadePanel.color.a > 0)
+            while (fadePanel.color.a > 0)
             {
                 fadeAmount = panelColor.a - (fadeSpeed * Time.deltaTime);
                 panelColor = new Color(panelColor.r, panelColor.g, panelColor.b, fadeAmount);
                 fadePanel.color = panelColor;
                 yield return null;
             }
-            Debug.Log("I'm opaque");
+            yield return new WaitForSeconds(waitAmount);
+            isFadingBlack = true;
+            allowInteraction = true;
+            PathNavigator.canMove = true;
         }
     }
 }
