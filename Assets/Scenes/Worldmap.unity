@@ -1651,6 +1651,8 @@ MonoBehaviour:
   currentPath: {fileID: 672026379}
   playerAnimator: {fileID: 2935908556719135153}
   enableMovementCooldown: 0.75
+  currentLevel: {fileID: 1289563162110242094}
+  worldMapLevel: {fileID: 11400000, guid: a0f2c0d35f5e01340bcc4345483d2867, type: 2}
   levelNumber: {fileID: 268837263}
   levelName: {fileID: 317030988}
   levelEnterInfo: {fileID: 1592312975}

@@ -22,8 +22,12 @@ public class PathNavigator : MonoBehaviour
     private Animator playerAnimator; //Not needed to implement until after cube tutorial explanation is done
     [SerializeField]
     private float enableMovementCooldown;
-    private Vector3 currentPosition;
+    [SerializeField]
     private LevelNodeData currentLevel;
+    [SerializeField]
+    private WorldData worldMapLevel;
+    private Vector3 currentPosition;
+    private Vector3 currentLevelPosition;
     private float progress;
 
     //UI references
@@ -40,15 +44,26 @@ public class PathNavigator : MonoBehaviour
 
     private void Start()
     {
-        PositionPlayerOnCurve();
+        if(worldMapLevel.currentLevel == null)
+        {
+            transform.position = currentLevel.transform.position;
+            currentLevelPosition = currentLevel.transform.position;
+        }
+        else
+        {
+            currentLevelPosition = worldMapLevel.currentLevel.position;
+            transform.position = currentLevelPosition;
+        }
+        //PositionPlayerOnCurve(); //Remove later in the tutorial once level node data SO's has been implemented
     }
 
     #region PlayerMovement
-    private void PositionPlayerOnCurve()
+    //Remove later in the turial once level node data SO's has been implemented
+   /*private void PositionPlayerOnCurve()
     {
         currentPosition = currentPath.GetPoint(progress);
         transform.localPosition = currentPosition;
-    }
+    }*/
 
     private void CheckDirection(Vector2 SelectedDirection)
     {
@@ -421,6 +436,7 @@ public class PathNavigator : MonoBehaviour
                 transform.localRotation = Quaternion.Euler(0, -180, 0);
             }
             levelEnterInfo.text = "Now entering level " + currentLevel.levelInfo.levelNumber;
+            worldMapLevel.currentLevel = currentLevel.levelInfo;
             SceneManager.Instance.ToggleEnterLevelInfo(true);
             playerAnimator.Play("Enter");
         }

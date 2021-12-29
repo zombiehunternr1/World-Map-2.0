@@ -10,4 +10,9 @@ public class LevelNodeData : MonoBehaviour
     public List<Direction> isPreviousPath;
     public LevelData levelInfo;
     public Material levelNodeMat;
+
+    private void OnEnable()
+    {
+        levelInfo.position = transform.position;
+    }
 }
