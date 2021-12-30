@@ -23,6 +23,25 @@ public class PathManager : MonoBehaviour
         CheckAlreadyUnlockedPaths();
     }
 
+    public void CheckUnlockingMovement()
+    {
+        if (CheckFirstTimeUnlocked())
+        {
+            pathNavigator.CanMove = CheckFirstTimeUnlocked();
+        }
+        else
+        {
+            pathNavigator.CanMove = CheckFirstTimeUnlocked();
+        }
+    }
+
+    public void UpdateUnlockedStatus(PathData path, bool firstTimeUnlocked)
+    {
+        path.unlocked = true;
+        path.firstTime = firstTimeUnlocked;
+        CheckUnlockingMovement();
+    }
+
     private void CheckAlreadyUnlockedPaths()
     {
         for(int i = 0; i < worldDataContainer.pathsInWorld.Count; i++)
@@ -45,7 +64,7 @@ public class PathManager : MonoBehaviour
         }
         CheckFirstTimeUnlocked();
     }
-    public bool CheckFirstTimeUnlocked()
+    private bool CheckFirstTimeUnlocked()
     {
         for (int i = 0; i < pathsInWorld.Count; i++)
         {
@@ -59,24 +78,5 @@ public class PathManager : MonoBehaviour
             }
         }
         return true;
-    }
-
-    public void CheckUnlockingMovement()
-    {
-        if (CheckFirstTimeUnlocked())
-        {
-            pathNavigator.CanMove = CheckFirstTimeUnlocked();
-        }
-        else
-        {
-            pathNavigator.CanMove = CheckFirstTimeUnlocked();
-        }
-    }
-
-    public void UpdateUnlockedStatus(PathData path, bool firstTimeUnlocked)
-    {
-        path.unlocked = true;
-        path.firstTime = firstTimeUnlocked;
-        CheckUnlockingMovement();
     }
 }
