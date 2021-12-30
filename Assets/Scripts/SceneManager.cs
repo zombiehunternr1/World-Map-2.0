@@ -8,8 +8,8 @@ public class SceneManager : MonoBehaviour
 {
     public static SceneManager Instance;
     
-    [HideInInspector]
-    public bool allowInteraction;
+    [SerializeField]
+    PathNavigator pathNavigator;
     [SerializeField]
     private bool isFadingBlack;
     private float fadeAmount;
@@ -20,6 +20,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField]
     private RectTransform levelEnterContainer;
     private float waitAmount = 1;
+    private bool allowInteraction;
 
     private void OnEnable()
     {
@@ -71,7 +72,7 @@ public class SceneManager : MonoBehaviour
             yield return new WaitForSeconds(waitAmount);
             isFadingBlack = true;
             allowInteraction = true;
-            PathNavigator.canMove = true;
+            pathNavigator.CanMove = allowInteraction;
         }
     }
 }

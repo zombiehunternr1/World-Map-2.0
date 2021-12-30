@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathsInWorld: []
   worldDataContainer: {fileID: 11400000, guid: a0f2c0d35f5e01340bcc4345483d2867, type: 2}
+  pathNavigator: {fileID: 2052383201}
 --- !u!1 &51997320
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,6 +905,7 @@ MonoBehaviour:
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   levelToUnlock: {fileID: 574666520}
+  pathNavigator: {fileID: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,6 +1599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allowInteraction: 0
+  pathNavigator: {fileID: 2052383201}
   isFadingBlack: 0
   fadeSpeed: 0.5
   fadePanel: {fileID: 74376273}
@@ -3218,6 +3221,7 @@ MonoBehaviour:
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   levelToUnlock: {fileID: 344922871}
+  pathNavigator: {fileID: 0}
 --- !u!114 &5865931778445876734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3298,6 +3302,7 @@ MonoBehaviour:
   spacing: 1
   pathDecorTransform: {fileID: 1599333857803977155, guid: 494068340142a0740b4f54643e93feba, type: 3}
   levelToUnlock: {fileID: 344922871}
+  pathNavigator: {fileID: 0}
 --- !u!4 &7952163643253737454
 Transform:
   m_ObjectHideFlags: 0

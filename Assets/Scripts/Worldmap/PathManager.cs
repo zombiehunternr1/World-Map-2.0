@@ -8,6 +8,8 @@ public class PathManager : MonoBehaviour
     private List<PathLayout> pathsInWorld;
     [SerializeField]
     private WorldData worldDataContainer;
+    [SerializeField]
+    private PathNavigator pathNavigator;
 
     private void OnEnable()
     {
@@ -51,7 +53,7 @@ public class PathManager : MonoBehaviour
             {
                 if (pathsInWorld[i].GetComponent<PathDecoration>().firstTime)
                 {
-                    PathNavigator.canMove = false;
+                    pathNavigator.CanMove = false;
                     worldDataContainer.pathsInWorld[i].unlocked = true;
                     return;
                 }
