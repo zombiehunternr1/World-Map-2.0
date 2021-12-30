@@ -45,7 +45,7 @@ public class PathManager : MonoBehaviour
         }
         CheckFirstTimeUnlocked();
     }
-    private void CheckFirstTimeUnlocked()
+    public bool CheckFirstTimeUnlocked()
     {
         for (int i = 0; i < pathsInWorld.Count; i++)
         {
@@ -53,16 +53,30 @@ public class PathManager : MonoBehaviour
             {
                 if (pathsInWorld[i].GetComponent<PathDecoration>().firstTime)
                 {
-                    pathNavigator.CanMove = false;
                     worldDataContainer.pathsInWorld[i].unlocked = true;
-                    return;
+                    return false;
                 }
             }
         }
+        return true;
     }
+
+    public void CheckUnlockingMovement()
+    {
+        if (CheckFirstTimeUnlocked())
+        {
+            pathNavigator.CanMove = CheckFirstTimeUnlocked();
+        }
+        else
+        {
+            pathNavigator.CanMove = CheckFirstTimeUnlocked();
+        }
+    }
+
     public void UpdateUnlockedStatus(PathData path, bool firstTimeUnlocked)
     {
         path.unlocked = true;
         path.firstTime = firstTimeUnlocked;
+        CheckUnlockingMovement();
     }
 }

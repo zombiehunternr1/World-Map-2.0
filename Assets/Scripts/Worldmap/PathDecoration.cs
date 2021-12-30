@@ -20,8 +20,6 @@ public class PathDecoration : MonoBehaviour
     private Transform pathDecorTransform;
     [SerializeField]
     private LevelNodeData levelToUnlock;
-    [SerializeField]
-    private PathNavigator pathNavigator;
     private PathLayout pathToDecorate;
     private PathManager pathManager;
     private void Start()
@@ -60,10 +58,10 @@ public class PathDecoration : MonoBehaviour
                     if (firstTime)
                     {
                         yield return new WaitForSeconds(waitDisplayNextPathDecoration);
-                        pathNavigator.CanMove = firstTime;
-                        firstTime = false;
-                        pathManager.UpdateUnlockedStatus(pathToDecorate.pathInfo, firstTime);
                         levelToUnlock.levelNodeMat.color = Color.green;
+                        firstTime = false;
+                        yield return new WaitForSeconds(waitDisplayNextPathDecoration);
+                        pathManager.UpdateUnlockedStatus(pathToDecorate.pathInfo, firstTime);
                     }
                     else
                     {
