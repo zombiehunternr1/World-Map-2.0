@@ -1598,7 +1598,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b07049c7d023ed41a4fad63a095971f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowInteraction: 0
   pathNavigator: {fileID: 2052383201}
   isFadingBlack: 0
   fadeSpeed: 0.5
