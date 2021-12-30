@@ -44,9 +44,10 @@ public class SceneManager : MonoBehaviour
     private IEnumerator FadeEffect(bool isFadingBlack)
     {
         yield return new WaitForSeconds(waitAmount);
-        Color panelColor = fadePanel.color;
+        Color panelColor = new Color();
         if (isFadingBlack)
         {
+            panelColor.a = 0;
             allowInteraction = false;
             while (fadePanel.color.a < 1)
             {
@@ -61,6 +62,7 @@ public class SceneManager : MonoBehaviour
         }
         else
         {
+            panelColor.a = 1;
             while (fadePanel.color.a > 0)
             {
                 fadeAmount = panelColor.a - (fadeSpeed * Time.deltaTime);
