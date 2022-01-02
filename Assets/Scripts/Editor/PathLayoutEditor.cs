@@ -22,10 +22,7 @@ public class PathLayoutEditor : Editor {
 		Vector3 p2 = ShowPoint(2);
 		Vector3 p3 = ShowPoint(3);
 		
-		Handles.color = Color.gray;
-		Handles.DrawLine(p0, p1);
-		Handles.DrawLine(p2, p3);
-		
+		Handles.color = Color.gray;	
 		Handles.DrawBezier(p0, p3, p1, p2, Color.white, null, 2f);
 	}
 
