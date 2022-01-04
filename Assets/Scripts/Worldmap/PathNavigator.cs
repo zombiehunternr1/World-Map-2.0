@@ -369,11 +369,11 @@ public class PathNavigator : MonoBehaviour
         }
     }
 
-    private IEnumerator PositionPlayerOnLevel(Transform LevelPosition)
+    private IEnumerator PositionPlayerOnLevel(Transform levelPosition)
     {
-        while (transform.localPosition != LevelPosition.position)
+        while (transform.localPosition != levelPosition.position)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, LevelPosition.position, Time.deltaTime * positioningSpeedOnLevelNode);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, levelPosition.position, Time.deltaTime * positioningSpeedOnLevelNode);
             yield return transform.localPosition;
         }
         if(transform.localRotation.y >= 0)
@@ -396,7 +396,7 @@ public class PathNavigator : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         progress = 0;
         CanMove = true;
-        StopCoroutine(PositionPlayerOnLevel(LevelPosition));
+        StopCoroutine(PositionPlayerOnLevel(levelPosition));
     }
     #endregion
 
