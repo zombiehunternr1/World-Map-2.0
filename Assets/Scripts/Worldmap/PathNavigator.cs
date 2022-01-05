@@ -138,7 +138,7 @@ public class PathNavigator : MonoBehaviour
             }
         }
         //Down
-        if (SelectedDirection.y == -1)
+        else if (SelectedDirection.y == -1)
         {
             foreach (LevelNodeData.Direction i in currentLevel.allAvailableDirectionOptions)
             {
@@ -203,7 +203,7 @@ public class PathNavigator : MonoBehaviour
             }
         }
         //Left
-        if (SelectedDirection.x == -1)
+        else if (SelectedDirection.x == -1)
         {
             foreach (var i in currentLevel.allAvailableDirectionOptions)
             {
@@ -268,7 +268,7 @@ public class PathNavigator : MonoBehaviour
             }
         }
         //Right
-        if (SelectedDirection.x == 1)
+        else if (SelectedDirection.x == 1)
         {
             foreach (var i in currentLevel.allAvailableDirectionOptions)
             {
