@@ -5,9 +5,9 @@ using UnityEngine;
 public class LevelNodeData : MonoBehaviour
 {
     public enum Direction { UP = 1, DOWN = 2, RIGHT = 3, LEFT = 4 }
-    public List<Direction> availableConnectedPaths;
+    public List<Direction> allAvailableDirectionOptions;
+    public List<Direction> allPreviousDirectionOptions;
     public List<PathLayout> connectedPaths;
-    public List<Direction> isPreviousPath;
     public LevelData levelInfo;
     public Material levelNodeMat;
 

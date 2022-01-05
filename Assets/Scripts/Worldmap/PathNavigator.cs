@@ -75,19 +75,19 @@ public class PathNavigator : MonoBehaviour
         //Up
         if (SelectedDirection.y == 1)
         {
-            foreach (var i in currentLevel.availableConnectedPaths)
+            foreach (var i in currentLevel.allAvailableDirectionOptions)
             {
                 if (i == LevelNodeData.Direction.UP)
                 {
                     CanMove = false;
-                    int Index = currentLevel.availableConnectedPaths.IndexOf(i);
+                    int Index = currentLevel.allAvailableDirectionOptions.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.UP;
                     if (currentPath != currentLevel.connectedPaths[Index])
                     {
                         currentPath = currentLevel.connectedPaths[Index];
                         if (currentPath.unlocked)
                         {
-                            foreach (var j in currentLevel.isPreviousPath)
+                            foreach (var j in currentLevel.allPreviousDirectionOptions)
                             {
                                 if (((int)j) == DirectionValue)
                                 {
@@ -105,9 +105,9 @@ public class PathNavigator : MonoBehaviour
                             CanMove = true;
                         }
                     }
-                    if (currentLevel.isPreviousPath.Count != 0)
+                    if (currentLevel.allPreviousDirectionOptions.Count != 0)
                     {
-                        foreach (var j in currentLevel.isPreviousPath)
+                        foreach (var j in currentLevel.allPreviousDirectionOptions)
                         {
                             if (((int)j) == DirectionValue)
                             {
@@ -140,19 +140,19 @@ public class PathNavigator : MonoBehaviour
         //Down
         if (SelectedDirection.y == -1)
         {
-            foreach (LevelNodeData.Direction i in currentLevel.availableConnectedPaths)
+            foreach (LevelNodeData.Direction i in currentLevel.allAvailableDirectionOptions)
             {
                 if (i == LevelNodeData.Direction.DOWN)
                 {
                     CanMove = false;
-                    int Index = currentLevel.availableConnectedPaths.IndexOf(i);
+                    int Index = currentLevel.allAvailableDirectionOptions.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.DOWN;
                     if (currentPath != currentLevel.connectedPaths[Index])
                     {
                         currentPath = currentLevel.connectedPaths[Index];
                         if (currentPath.unlocked)
                         {
-                            foreach (var j in currentLevel.isPreviousPath)
+                            foreach (var j in currentLevel.allPreviousDirectionOptions)
                             {
                                 if (((int)j) == DirectionValue)
                                 {
@@ -170,9 +170,9 @@ public class PathNavigator : MonoBehaviour
                             CanMove = true;
                         }
                     }
-                    if (currentLevel.isPreviousPath.Count != 0)
+                    if (currentLevel.allPreviousDirectionOptions.Count != 0)
                     {
-                        foreach (var j in currentLevel.isPreviousPath)
+                        foreach (var j in currentLevel.allPreviousDirectionOptions)
                         {
                             if (((int)j) == DirectionValue)
                             {
@@ -205,19 +205,19 @@ public class PathNavigator : MonoBehaviour
         //Left
         if (SelectedDirection.x == -1)
         {
-            foreach (var i in currentLevel.availableConnectedPaths)
+            foreach (var i in currentLevel.allAvailableDirectionOptions)
             {
                 if (i == LevelNodeData.Direction.LEFT)
                 {
                     CanMove = false;
-                    int Index = currentLevel.availableConnectedPaths.IndexOf(i);
+                    int Index = currentLevel.allAvailableDirectionOptions.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.LEFT;
                     if (currentPath != currentLevel.connectedPaths[Index])
                     {
                         currentPath = currentLevel.connectedPaths[Index];
                         if (currentPath.unlocked)
                         {
-                            foreach (var j in currentLevel.isPreviousPath)
+                            foreach (var j in currentLevel.allPreviousDirectionOptions)
                             {
                                 if (((int)j) == DirectionValue)
                                 {
@@ -235,9 +235,9 @@ public class PathNavigator : MonoBehaviour
                             CanMove = true;
                         }
                     }
-                    if (currentLevel.isPreviousPath.Count != 0)
+                    if (currentLevel.allPreviousDirectionOptions.Count != 0)
                     {
-                        foreach (var j in currentLevel.isPreviousPath)
+                        foreach (var j in currentLevel.allPreviousDirectionOptions)
                         {
                             if (((int)j) == DirectionValue)
                             {
@@ -270,19 +270,19 @@ public class PathNavigator : MonoBehaviour
         //Right
         if (SelectedDirection.x == 1)
         {
-            foreach (var i in currentLevel.availableConnectedPaths)
+            foreach (var i in currentLevel.allAvailableDirectionOptions)
             {
                 if (i == LevelNodeData.Direction.RIGHT)
                 {
                     CanMove = false;
-                    int Index = currentLevel.availableConnectedPaths.IndexOf(i);
+                    int Index = currentLevel.allAvailableDirectionOptions.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.RIGHT;
                     if (currentPath != currentLevel.connectedPaths[Index])
                     {
                         currentPath = currentLevel.connectedPaths[Index];
                         if (currentPath.unlocked)
                         {
-                            foreach (var j in currentLevel.isPreviousPath)
+                            foreach (var j in currentLevel.allPreviousDirectionOptions)
                             {
                                 if (((int)j) == DirectionValue)
                                 {
@@ -300,9 +300,9 @@ public class PathNavigator : MonoBehaviour
                             CanMove = false;
                         }
                     }
-                    if (currentLevel.isPreviousPath.Count != 0)
+                    if (currentLevel.allPreviousDirectionOptions.Count != 0)
                     {
-                        foreach (var j in currentLevel.isPreviousPath)
+                        foreach (var j in currentLevel.allPreviousDirectionOptions)
                         {
                             if (((int)j) == DirectionValue)
                             {
