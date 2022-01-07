@@ -22,9 +22,9 @@ public class PathDecorator : MonoBehaviour
     private PathManager pathManager;
     private void Start()
     {
-        levelToUnlock.levelNodeMat.color = Color.red;
         pathToDecorate = GetComponent<PathLayout>();
         pathManager = GetComponentInParent<PathManager>();
+        levelToUnlock.levelNodeMat.color = Color.red;
         if (pathToDecorate.unlocked)
         {
             StartCoroutine(DecoratePath());
@@ -42,43 +42,40 @@ public class PathDecorator : MonoBehaviour
         {
             yield return new WaitForSeconds(waitBeforePathDecorating);
         }
-        for (int p = 0, f = 0; f < frequency; f++)
+        for (int p = 0, f = 0; f < frequency; f++, p++)
         {
-            for (int i = 0; i < spacing; i++, p++)
+            if (p < skipAmount)
             {
-                if (p < skipAmount)
-                {
-                    yield return null;
-                }               
-                else if (p == frequency - 1)
-                {
-                    PlacePathDecoration(p, stepSize);
-                    if (firstTime)
-                    {
-                        yield return new WaitForSeconds(waitDisplayNextPathDecoration);
-                        levelToUnlock.levelNodeMat.color = Color.green;
-                        firstTime = false;
-                        yield return new WaitForSeconds(waitDisplayNextPathDecoration);
-                        pathManager.UpdateUnlockedStatus(pathToDecorate.pathInfo, firstTime);
-                    }
-                    else
-                    {
-                        levelToUnlock.levelNodeMat.color = Color.green;
-                    }
-                    StopAllCoroutines();
-                }
-                else
-                {
-                    PlacePathDecoration(p, stepSize);
-                }
+                yield return null;
+            }
+            else if (p == frequency - 1)
+            {
+                PlacePathDecoration(p, stepSize);
                 if (firstTime)
                 {
                     yield return new WaitForSeconds(waitDisplayNextPathDecoration);
+                    levelToUnlock.levelNodeMat.color = Color.green;
+                    firstTime = false;
+                    yield return new WaitForSeconds(waitDisplayNextPathDecoration);
+                    pathManager.UpdateUnlockedStatus(pathToDecorate.pathInfo, firstTime);
                 }
                 else
                 {
-                    yield return null;
+                    levelToUnlock.levelNodeMat.color = Color.green;
                 }
+                StopAllCoroutines();
+            }
+            else
+            {
+                PlacePathDecoration(p, stepSize);
+            }
+            if (firstTime)
+            {
+                yield return new WaitForSeconds(waitDisplayNextPathDecoration);
+            }
+            else
+            {
+                yield return null;
             }
         }
     }
