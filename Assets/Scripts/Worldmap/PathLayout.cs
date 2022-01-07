@@ -3,6 +3,7 @@
 public class PathLayout : MonoBehaviour {
 
 	public PathData pathInfo;
+	[HideInInspector]
 	public bool unlocked;
 	public Vector3[] points;
 
