@@ -396,7 +396,6 @@ public class PathNavigator : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         progress = 0;
         CanMove = true;
-        StopCoroutine(PositionPlayerOnLevel(levelPosition));
     }
     #endregion
 
