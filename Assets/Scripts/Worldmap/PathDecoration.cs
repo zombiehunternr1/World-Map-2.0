@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathDecoration : MonoBehaviour
 {
-    //[HideInInspector]
+    [HideInInspector]
     public bool firstTime = true;
     [SerializeField]
     private int waitBeforePathDecorating = 3;
