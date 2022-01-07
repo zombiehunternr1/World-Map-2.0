@@ -41,6 +41,12 @@ public class PathNavigator : MonoBehaviour
     private Vector2 directionInput;
     #endregion
 
+    public bool CanMove
+    {
+        get;
+        set;
+    }
+
     private void Start()
     {
         if(worldMapLevel.currentLevel == null)
@@ -63,12 +69,6 @@ public class PathNavigator : MonoBehaviour
          currentPosition = currentPath.GetPoint(progress);
          transform.localPosition = currentPosition;
      }*/
-
-    public bool CanMove
-    {
-        get;
-        set;
-    }
 
     private void CheckDirection(Vector2 SelectedDirection)
     {
