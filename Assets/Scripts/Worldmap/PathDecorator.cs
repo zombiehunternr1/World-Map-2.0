@@ -6,15 +6,14 @@ public class PathDecorator : MonoBehaviour
 {
     [HideInInspector]
     public bool firstTime = true;
-    private int waitBeforePathDecorating = 3;
     [SerializeField]
     private float waitDisplayNextPathDecoration;
+    private float spacing = 1;
     [SerializeField]
     private int frequency;
     [SerializeField]
     private int skipAmount;
-    [SerializeField]
-    private float spacing = 1;
+    private int waitBeforePathDecorating = 3;
     [SerializeField]
     private Transform pathDecorTransform;
     [SerializeField]
