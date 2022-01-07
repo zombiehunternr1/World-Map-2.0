@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathDecoration : MonoBehaviour
+public class PathDecorator : MonoBehaviour
 {
     [HideInInspector]
     public bool firstTime = true;
-    [SerializeField]
     private int waitBeforePathDecorating = 3;
     [SerializeField]
     private float waitDisplayNextPathDecoration;
