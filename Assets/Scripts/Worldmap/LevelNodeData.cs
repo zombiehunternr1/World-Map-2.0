@@ -8,11 +8,11 @@ public class LevelNodeData : MonoBehaviour
     public List<Direction> allAvailableDirectionOptions;
     public List<Direction> allPreviousDirectionOptions;
     public List<PathLayout> connectedPaths;
-    public LevelData levelInfo;
+    public LevelData levelData;
     public Material levelNodeMat;
 
     private void OnEnable()
     {
-        levelInfo.position = transform.position;
+        levelData.position = transform.position;
     }
 }

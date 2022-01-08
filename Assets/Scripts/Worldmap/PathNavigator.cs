@@ -404,8 +404,8 @@ public class PathNavigator : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(PositionPlayerOnLevel(other.transform));
         currentLevel = other.GetComponent<LevelNodeData>();
-        levelNumber.text = "Level: " + currentLevel.levelInfo.levelNumber;
-        levelName.text = currentLevel.levelInfo.levelName;
+        levelNumber.text = "Level: " + currentLevel.levelData.levelNumber;
+        levelName.text = currentLevel.levelData.levelName;
     }
 
     private void OnTriggerExit()
@@ -439,8 +439,8 @@ public class PathNavigator : MonoBehaviour
             {
                 transform.localRotation = Quaternion.Euler(0, -180, 0);
             }
-            levelEnterInfo.text = "Now entering level " + currentLevel.levelInfo.levelNumber;
-            worldMapLevel.currentLevel = currentLevel.levelInfo;
+            levelEnterInfo.text = "Now entering level " + currentLevel.levelData.levelNumber;
+            worldMapLevel.currentLevel = currentLevel.levelData;
             SceneManager.Instance.ToggleEnterLevelInfo(true);
             playerAnimator.Play("Enter");
         }
