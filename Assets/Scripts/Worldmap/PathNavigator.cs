@@ -15,6 +15,11 @@ public class PathNavigator : MonoBehaviour
     private float positioningSpeedOnLevelNode;
 
     //Reference and positioning variables
+    public bool canMove
+    {
+        get;
+        set;
+    }
     [SerializeField]
     private PathLayout currentPath;
     [SerializeField]
@@ -40,12 +45,6 @@ public class PathNavigator : MonoBehaviour
     //Player input
     private Vector2 directionInput;
     #endregion
-
-    public bool CanMove
-    {
-        get;
-        set;
-    }
 
     private void Start()
     {
@@ -79,7 +78,7 @@ public class PathNavigator : MonoBehaviour
             {
                 if (i == LevelNodeData.Direction.UP)
                 {
-                    CanMove = false;
+                    canMove = false;
                     int Index = currentLevel.allAvailableDirectionOptions.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.UP;
                     if (currentPath != currentLevel.connectedPaths[Index])
@@ -102,7 +101,7 @@ public class PathNavigator : MonoBehaviour
                         }
                         else
                         {
-                            CanMove = true;
+                            canMove = true;
                         }
                     }
                     if (currentLevel.allPreviousDirectionOptions.Count != 0)
@@ -118,7 +117,7 @@ public class PathNavigator : MonoBehaviour
                                 }
                                 else
                                 {
-                                    CanMove = true;
+                                    canMove = true;
                                 }
                             }
                         }
@@ -131,7 +130,7 @@ public class PathNavigator : MonoBehaviour
                         }
                         else
                         {
-                            CanMove = true;
+                            canMove = true;
                         }
                     }
                 }
@@ -144,7 +143,7 @@ public class PathNavigator : MonoBehaviour
             {
                 if (i == LevelNodeData.Direction.DOWN)
                 {
-                    CanMove = false;
+                    canMove = false;
                     int Index = currentLevel.allAvailableDirectionOptions.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.DOWN;
                     if (currentPath != currentLevel.connectedPaths[Index])
@@ -167,7 +166,7 @@ public class PathNavigator : MonoBehaviour
                         }
                         else
                         {
-                            CanMove = true;
+                            canMove = true;
                         }
                     }
                     if (currentLevel.allPreviousDirectionOptions.Count != 0)
@@ -183,7 +182,7 @@ public class PathNavigator : MonoBehaviour
                                 }
                                 else
                                 {
-                                    CanMove = true;
+                                    canMove = true;
                                 }
                             }
                         }
@@ -196,7 +195,7 @@ public class PathNavigator : MonoBehaviour
                         }
                         else
                         {
-                            CanMove = true;
+                            canMove = true;
                         }
                     }
                 }
@@ -209,7 +208,7 @@ public class PathNavigator : MonoBehaviour
             {
                 if (i == LevelNodeData.Direction.LEFT)
                 {
-                    CanMove = false;
+                    canMove = false;
                     int Index = currentLevel.allAvailableDirectionOptions.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.LEFT;
                     if (currentPath != currentLevel.connectedPaths[Index])
@@ -232,7 +231,7 @@ public class PathNavigator : MonoBehaviour
                         }
                         else
                         {
-                            CanMove = true;
+                            canMove = true;
                         }
                     }
                     if (currentLevel.allPreviousDirectionOptions.Count != 0)
@@ -248,7 +247,7 @@ public class PathNavigator : MonoBehaviour
                                 }
                                 else
                                 {
-                                    CanMove = true;
+                                    canMove = true;
                                 }
                             }
                         }
@@ -261,7 +260,7 @@ public class PathNavigator : MonoBehaviour
                         }
                         else
                         {
-                            CanMove = true;
+                            canMove = true;
                         }
                     }
                 }
@@ -274,7 +273,7 @@ public class PathNavigator : MonoBehaviour
             {
                 if (i == LevelNodeData.Direction.RIGHT)
                 {
-                    CanMove = false;
+                    canMove = false;
                     int Index = currentLevel.allAvailableDirectionOptions.IndexOf(i);
                     int DirectionValue = (int)LevelNodeData.Direction.RIGHT;
                     if (currentPath != currentLevel.connectedPaths[Index])
@@ -297,7 +296,7 @@ public class PathNavigator : MonoBehaviour
                         }
                         else
                         {
-                            CanMove = false;
+                            canMove = false;
                         }
                     }
                     if (currentLevel.allPreviousDirectionOptions.Count != 0)
@@ -313,7 +312,7 @@ public class PathNavigator : MonoBehaviour
                                 }
                                 else
                                 {
-                                    CanMove = true;
+                                    canMove = true;
                                 }
                             }
                         }
@@ -326,7 +325,7 @@ public class PathNavigator : MonoBehaviour
                         }
                         else
                         {
-                            CanMove = true;
+                            canMove = true;
                         }
                     }
                 }
@@ -395,7 +394,7 @@ public class PathNavigator : MonoBehaviour
         playerAnimator.Play("Idle"); //Not needed to implement until after cube tutorial explanation is done
         yield return new WaitForSeconds(0.5f);
         progress = 0;
-        CanMove = true;
+        canMove = true;
     }
     #endregion
 
@@ -419,7 +418,7 @@ public class PathNavigator : MonoBehaviour
     public void OnDirection(InputAction.CallbackContext Context)
     {
         directionInput = Context.ReadValue<Vector2>();
-        if (CanMove)
+        if (canMove)
         {
             CheckDirection(directionInput);
         }
@@ -427,9 +426,9 @@ public class PathNavigator : MonoBehaviour
 
     public void OnConfirm()
     {
-        if (CanMove)
+        if (canMove)
         {
-            CanMove = false;
+            canMove = false;
             SceneManager.Instance.SceneTransition(true);
             if (transform.localRotation.y > 0)
             {

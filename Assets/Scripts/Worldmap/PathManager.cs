@@ -31,7 +31,7 @@ public class PathManager : MonoBehaviour
     }
     public void CheckUnlockingMovement()
     {
-        pathNavigator.CanMove = CheckFirstTimeUnlocked();
+        pathNavigator.canMove = CheckFirstTimeUnlocked();
     }
 
     private void CheckAlreadyUnlockedPaths()
