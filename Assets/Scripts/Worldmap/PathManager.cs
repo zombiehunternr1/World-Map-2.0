@@ -40,17 +40,17 @@ public class PathManager : MonoBehaviour
         {
             if (worldDataContainer.pathsInWorld[i].unlocked)
             {
-                if (worldDataContainer.pathsInWorld[i].firstTime == false)
-                {
-                    pathsInWorld[i].unlocked = worldDataContainer.pathsInWorld[i].unlocked;
-                    pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldDataContainer.pathsInWorld[i].firstTime;
-                }
-                else
+                if (worldDataContainer.pathsInWorld[i].firstTime == true)
                 {
                     PathDecorator pathDecor = pathsInWorld[i].GetComponent<PathDecorator>();
                     pathDecor.firstTime = worldDataContainer.pathsInWorld[i].firstTime;
                     pathsInWorld[i].unlocked = worldDataContainer.pathsInWorld[i].unlocked;
                     pathDecor.StartCoroutine(pathDecor.DecoratePath());
+                }
+                else
+                {
+                    pathsInWorld[i].unlocked = worldDataContainer.pathsInWorld[i].unlocked;
+                    pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldDataContainer.pathsInWorld[i].firstTime;
                 }
             }
         }
