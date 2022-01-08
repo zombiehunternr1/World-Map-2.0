@@ -23,18 +23,6 @@ public class PathManager : MonoBehaviour
         CheckAlreadyUnlockedPaths();
     }
 
-    public void CheckUnlockingMovement()
-    {
-        if (CheckFirstTimeUnlocked())
-        {
-            pathNavigator.CanMove = CheckFirstTimeUnlocked();
-        }
-        else
-        {
-            pathNavigator.CanMove = CheckFirstTimeUnlocked();
-        }
-    }
-
     public void UpdateUnlockedStatus(PathData path, bool firstTimeUnlocked)
     {
         path.unlocked = true;
@@ -63,6 +51,10 @@ public class PathManager : MonoBehaviour
             }
         }
         CheckFirstTimeUnlocked();
+    }
+    private void CheckUnlockingMovement()
+    {
+        pathNavigator.CanMove = CheckFirstTimeUnlocked();
     }
     private bool CheckFirstTimeUnlocked()
     {

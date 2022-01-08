@@ -5,6 +5,5 @@ using UnityEngine;
 public class WorldData : ScriptableObject
 {
     public List<PathData> pathsInWorld;
-
     public LevelData currentLevel;
 }
