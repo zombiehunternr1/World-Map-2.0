@@ -56,7 +56,7 @@ public class SceneManager : MonoBehaviour
                 fadePanel.color = panelColor;
                 yield return fadePanel.color.a;
             }
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(waitAmount);
             ToggleEnterLevelInfo(allowInteraction);
             StartCoroutine(FadeEffect(allowInteraction));
         }
