@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneManager : MonoBehaviour
 {
-    public static SceneManager Instance;
+    public static SceneManager sceneManagerInstance;
     
     [SerializeField]
     private PathManager pathManager;
@@ -23,9 +23,9 @@ public class SceneManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (Instance == null)
+        if (sceneManagerInstance == null)
         {
-            Instance = this;
+            sceneManagerInstance = this;
             DontDestroyOnLoad(this);
         }
         StartCoroutine(FadeEffect(isFadingBlack));

@@ -411,7 +411,7 @@ public class PathNavigator : MonoBehaviour
     {
         levelNumber.text = "Level: ";
         levelName.text = "";
-        SceneManager.Instance.ToggleEnterLevelInfo(false);
+        SceneManager.sceneManagerInstance.ToggleEnterLevelInfo(false);
     }
 
     #region Inputsystem
@@ -429,7 +429,7 @@ public class PathNavigator : MonoBehaviour
         if (canMove)
         {
             canMove = false;
-            SceneManager.Instance.SceneTransition(true);
+            SceneManager.sceneManagerInstance.SceneTransition(true);
             if (transform.localRotation.y > 0)
             {
                 transform.localRotation = Quaternion.Euler(0, 180, 0);
@@ -440,7 +440,7 @@ public class PathNavigator : MonoBehaviour
             }
             levelEnterInfo.text = "Now entering level " + currentLevel.levelData.levelNumber;
             worldMapLevel.currentLevel = currentLevel.levelData;
-            SceneManager.Instance.ToggleEnterLevelInfo(true);
+            SceneManager.sceneManagerInstance.ToggleEnterLevelInfo(true);
             playerAnimator.Play("Enter");
         }
     }
