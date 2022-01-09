@@ -25,8 +25,6 @@ public class PathNavigator : MonoBehaviour
     [SerializeField]
     private Animator playerAnimator; //Not needed to implement until after cube tutorial explanation is done
     [SerializeField]
-    private float enableMovementCooldown;
-    [SerializeField]
     private LevelNodeData currentLevel;
     [SerializeField]
     private WorldData worldMapLevel;
