@@ -401,7 +401,7 @@ public class PathNavigator : MonoBehaviour
     {
         levelNumber.text = "Level: ";
         levelName.text = "";
-        SceneManager.sceneManagerInstance.ToggleEnterLevelInfo(false);
+        GameManager.sceneManagerInstance.ToggleEnterLevelInfo(false);
     }
 
     #region Inputsystem
@@ -419,10 +419,10 @@ public class PathNavigator : MonoBehaviour
         if (canMove)
         {
             canMove = false;
-            SceneManager.sceneManagerInstance.SceneTransition(true);
+            GameManager.sceneManagerInstance.SceneTransition(true, currentLevel);
             levelEnterInfo.text = "Now entering level " + currentLevel.levelData.levelNumber;
             worldMapLevel.currentLevel = currentLevel.levelData;
-            SceneManager.sceneManagerInstance.ToggleEnterLevelInfo(true);
+            GameManager.sceneManagerInstance.ToggleEnterLevelInfo(true);
             playerAnimator.Play("Enter");
         }
     }

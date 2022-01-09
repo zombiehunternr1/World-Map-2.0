@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static SceneManager sceneManagerInstance;
+    public static GameManager sceneManagerInstance;
     
     [SerializeField]
     private PathManager pathManager;
@@ -28,12 +28,12 @@ public class SceneManager : MonoBehaviour
             sceneManagerInstance = this;
             DontDestroyOnLoad(sceneManagerInstance);
         }
-        StartCoroutine(FadeEffect(isFadingBlack));
+        StartCoroutine(FadeEffect(isFadingBlack, null));
     }
 
-    public void SceneTransition(bool isFadingBlack)
+    public void SceneTransition(bool isFadingBlack, LevelNodeData selectedLevel)
     {
-        StartCoroutine(FadeEffect(isFadingBlack));
+        StartCoroutine(FadeEffect(isFadingBlack, selectedLevel));
     }
 
     public void ToggleEnterLevelInfo(bool toggle)
@@ -41,7 +41,7 @@ public class SceneManager : MonoBehaviour
         levelEnterContainer.gameObject.SetActive(toggle);
     }
 
-    private IEnumerator FadeEffect(bool isFadingBlack)
+    private IEnumerator FadeEffect(bool isFadingBlack, LevelNodeData selectedLevel)
     {
         yield return new WaitForSeconds(waitAmount);
         Color panelColor = new Color();
@@ -58,7 +58,8 @@ public class SceneManager : MonoBehaviour
             }
             yield return new WaitForSeconds(waitAmount);
             ToggleEnterLevelInfo(allowInteraction);
-            StartCoroutine(FadeEffect(allowInteraction));
+            int index = selectedLevel.levelData.levelNumber;
+            StartCoroutine(FadeEffect(allowInteraction, selectedLevel));
         }
         else
         {
