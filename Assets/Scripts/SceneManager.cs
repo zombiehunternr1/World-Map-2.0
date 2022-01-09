@@ -26,7 +26,7 @@ public class SceneManager : MonoBehaviour
         if (sceneManagerInstance == null)
         {
             sceneManagerInstance = this;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(sceneManagerInstance);
         }
         StartCoroutine(FadeEffect(isFadingBlack));
     }
