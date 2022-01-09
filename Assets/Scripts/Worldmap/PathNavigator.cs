@@ -430,14 +430,6 @@ public class PathNavigator : MonoBehaviour
         {
             canMove = false;
             SceneManager.sceneManagerInstance.SceneTransition(true);
-            if (transform.localRotation.y > 0)
-            {
-                transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
-            if(transform.localRotation.y < 0)
-            {
-                transform.localRotation = Quaternion.Euler(0, -180, 0);
-            }
             levelEnterInfo.text = "Now entering level " + currentLevel.levelData.levelNumber;
             worldMapLevel.currentLevel = currentLevel.levelData;
             SceneManager.sceneManagerInstance.ToggleEnterLevelInfo(true);
