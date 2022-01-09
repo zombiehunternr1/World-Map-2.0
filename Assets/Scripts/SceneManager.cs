@@ -71,7 +71,6 @@ public class SceneManager : MonoBehaviour
                 yield return fadePanel.color.a;
             }
             yield return new WaitForSeconds(waitAmount);
-            isFadingBlack = true;
             pathManager.CheckUnlockingMovement();
         }
     }
