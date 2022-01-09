@@ -54,7 +54,7 @@ public class SceneManager : MonoBehaviour
                 fadeAmount = panelColor.a + (fadeSpeed * Time.deltaTime);
                 panelColor = new Color(panelColor.r, panelColor.g, panelColor.b, fadeAmount);
                 fadePanel.color = panelColor;
-                yield return null;
+                yield return fadePanel.color.a;
             }
             yield return new WaitForSeconds(0.5f);
             ToggleEnterLevelInfo(allowInteraction);
@@ -68,7 +68,7 @@ public class SceneManager : MonoBehaviour
                 fadeAmount = panelColor.a - (fadeSpeed * Time.deltaTime);
                 panelColor = new Color(panelColor.r, panelColor.g, panelColor.b, fadeAmount);
                 fadePanel.color = panelColor;
-                yield return null;
+                yield return fadePanel.color.a;
             }
             yield return new WaitForSeconds(waitAmount);
             isFadingBlack = true;
