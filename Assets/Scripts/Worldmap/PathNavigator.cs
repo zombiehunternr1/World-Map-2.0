@@ -58,17 +58,9 @@ public class PathNavigator : MonoBehaviour
             currentLevelPosition = worldMapLevel.currentLevel.position;
             transform.position = currentLevelPosition;
         }
-        //PositionPlayerOnCurve(); //Remove later in the tutorial once level node data SO's has been implemented
     }
 
     #region PlayerMovement
-    //Remove later in the turial once level node data SO's has been implemented
-    /*private void PositionPlayerOnCurve()
-     {
-         currentPosition = currentPath.GetPoint(progress);
-         transform.localPosition = currentPosition;
-     }*/
-
     private void CheckDirection(Vector2 SelectedDirection)
     {
         //Up
