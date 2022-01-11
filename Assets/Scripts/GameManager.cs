@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour
     private Image fadePanel;
     [SerializeField]
     private RectTransform levelEnterContainer;
+    [SerializeField]
+    private RectTransform levelInfoContainer;
     private float waitAmount = 1;
     private float fadeAmount;
     private bool allowInteraction;
     private bool isFadingBlack;
+    private int levelIndex;
 
     private void OnEnable()
     {
@@ -41,6 +44,39 @@ public class GameManager : MonoBehaviour
         levelEnterContainer.gameObject.SetActive(toggle);
     }
 
+    private int SetLevelIndex(int levelNumber)
+    {
+        if(levelNumber != 0)
+        {
+            return levelNumber;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    private void CheckLevelIndex(LevelNodeData selectedLevel)
+    {
+        if (selectedLevel != null)
+        {
+            levelIndex = selectedLevel.levelData.levelNumber;
+        }
+        else
+        {
+            levelIndex = 0;
+        }
+        if(SetLevelIndex(levelIndex) == 0)
+        {
+            SceneManager.LoadScene(levelIndex);
+        }
+        else
+        {
+            levelInfoContainer.gameObject.SetActive(false);
+            SceneManager.LoadScene(levelIndex);
+        }
+    }
+
     private IEnumerator FadeEffect(bool isFadingBlack, LevelNodeData selectedLevel)
     {
         yield return new WaitForSeconds(waitAmount);
@@ -58,7 +94,7 @@ public class GameManager : MonoBehaviour
             }
             yield return new WaitForSeconds(waitAmount);
             ToggleEnterLevelInfo(allowInteraction);
-            int index = selectedLevel.levelData.levelNumber;
+            CheckLevelIndex(selectedLevel);
             StartCoroutine(FadeEffect(allowInteraction, selectedLevel));
         }
         else
