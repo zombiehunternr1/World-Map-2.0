@@ -44,6 +44,11 @@ public class GameManager : MonoBehaviour
         levelEnterContainer.gameObject.SetActive(toggle);
     }
 
+    public void LevelComplete(PathData pathData)
+    {
+        pathManager.UpdateUnlockedStatus(pathData, pathData.firstTime);
+    }
+
     private int SetLevelIndex(int levelNumber)
     {
         if(levelNumber != 0)
