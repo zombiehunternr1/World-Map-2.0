@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
-using TMPro;
 
 public class PathNavigator : MonoBehaviour
 {
@@ -31,14 +30,6 @@ public class PathNavigator : MonoBehaviour
     private Vector3 currentPathPosition;
     private Vector3 currentLevelPosition;
     private float progress;
-
-    //UI references
-    [SerializeField]
-    private TextMeshProUGUI levelNumber;
-    [SerializeField]
-    private TextMeshProUGUI levelName;
-    [SerializeField]
-    private TextMeshProUGUI levelEnterInfo;
 
     //Player input
     private Vector2 directionInput;
@@ -393,15 +384,13 @@ public class PathNavigator : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(PositionPlayerOnLevel(other.transform));
         currentLevel = other.GetComponent<LevelNodeData>();
-        levelNumber.text = "Level: " + currentLevel.levelData.levelNumber;
-        levelName.text = currentLevel.levelData.levelName;
+        GameManager.sceneManagerInstance.SetLevelUIDataDisplay(currentLevel);
     }
 
     private void OnTriggerExit()
-    {
-        levelNumber.text = "Level: ";
-        levelName.text = "";
+    {  
         GameManager.sceneManagerInstance.ToggleEnterLevelInfo(false);
+        GameManager.sceneManagerInstance.SetLevelUIDataDisplay(null);
     }
 
     #region Inputsystem
@@ -420,8 +409,8 @@ public class PathNavigator : MonoBehaviour
         {
             canMove = false;
             GameManager.sceneManagerInstance.SceneTransition(true, currentLevel);
-            levelEnterInfo.text = "Now entering level " + currentLevel.levelData.levelNumber;
             worldMapLevel.currentLevel = currentLevel.levelData;
+            GameManager.sceneManagerInstance.SetLevelUIDataEnter(currentLevel);
             GameManager.sceneManagerInstance.ToggleEnterLevelInfo(true);
             playerAnimator.Play("Enter");
         }

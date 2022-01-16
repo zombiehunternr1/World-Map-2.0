@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PathDecorator : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public bool firstTime = true;
     [SerializeField]
     private float waitDisplayNextPathDecoration;
@@ -20,12 +20,17 @@ public class PathDecorator : MonoBehaviour
     private LevelNodeData levelToUnlock;
     private PathLayout pathToDecorate;
     private PathManager pathManager;
-    private void Start()
+
+    private void OnEnable()
     {
         pathToDecorate = GetComponent<PathLayout>();
         pathManager = GetComponentInParent<PathManager>();
         levelToUnlock.levelNodeMat.color = Color.red;
-        if (pathToDecorate.unlocked)
+    }
+
+    private void Start()
+    {
+        if (pathToDecorate.unlocked && !firstTime)
         {
             StartCoroutine(DecoratePath());
         }
@@ -56,8 +61,8 @@ public class PathDecorator : MonoBehaviour
                     yield return new WaitForSeconds(waitDisplayNextPathDecoration);
                     levelToUnlock.levelNodeMat.color = Color.green;
                     firstTime = false;
+                    pathManager.UpdateFirstTime(firstTime, pathToDecorate.pathInfo);
                     yield return new WaitForSeconds(waitDisplayNextPathDecoration);
-                    pathManager.UpdateUnlockedStatus(pathToDecorate.pathInfo, firstTime);
                 }
                 else
                 {

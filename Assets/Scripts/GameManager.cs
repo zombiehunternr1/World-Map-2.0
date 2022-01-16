@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager sceneManagerInstance;
-    
+
+    public WorldData worldData;
     [SerializeField]
     private PathManager pathManager;
     [SerializeField]
@@ -18,6 +20,13 @@ public class GameManager : MonoBehaviour
     private RectTransform levelEnterContainer;
     [SerializeField]
     private RectTransform levelInfoContainer;
+    [SerializeField]
+    private TextMeshProUGUI levelNumber;
+    [SerializeField]
+    private TextMeshProUGUI levelName;
+    [SerializeField]
+    private TextMeshProUGUI levelEnterInfo;
+
     private float waitAmount = 1;
     private float fadeAmount;
     private bool allowInteraction;
@@ -31,7 +40,42 @@ public class GameManager : MonoBehaviour
             sceneManagerInstance = this;
             DontDestroyOnLoad(sceneManagerInstance);
         }
-        StartCoroutine(FadeEffect(isFadingBlack, null));
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        if (!isFadingBlack)
+        {
+            StartCoroutine(FadeEffect(isFadingBlack, null));
+        }
+    }
+
+    public void SetPathManager(PathManager getPathManager)
+    {
+        pathManager = getPathManager;
+    }
+
+    public void SetLevelUIDataDisplay(LevelNodeData levelData)
+    {
+        if(levelData == null)
+        {
+            levelNumber.text = "Level: ";
+            levelName.text = "";
+        }
+        else
+        {
+            levelNumber.text = "Level: " + levelData.levelData.levelNumber;
+            levelName.text = levelData.levelData.levelName;
+        }
+    }
+
+    public void SetLevelUIDataEnter(LevelNodeData levelData)
+    {
+        levelEnterInfo.text = "Now entering level " + levelData.levelData.levelNumber;
     }
 
     public void SceneTransition(bool isFadingBlack, LevelNodeData selectedLevel)
@@ -46,7 +90,17 @@ public class GameManager : MonoBehaviour
 
     public void LevelComplete(PathData pathData)
     {
-        pathManager.UpdateUnlockedStatus(pathData, pathData.firstTime);
+        if(pathData != null)
+        {
+            for (int i = 0; i < worldData.pathsInWorld.Count; i++)
+            {
+                if (worldData.pathsInWorld[i] == pathData)
+                {
+                    pathManager.UpdateUnlockedStatus(pathData.firstTime, i);
+                }
+            }
+        }
+
     }
 
     private int SetLevelIndex(int levelNumber)
@@ -113,7 +167,10 @@ public class GameManager : MonoBehaviour
                 yield return fadePanel.color.a;
             }
             yield return new WaitForSeconds(waitAmount);
-            pathManager.CheckUnlockingMovement();
+            if(pathManager != null)
+            {
+                pathManager.CheckUnlockingMovement();
+            }
         }
     }
 }

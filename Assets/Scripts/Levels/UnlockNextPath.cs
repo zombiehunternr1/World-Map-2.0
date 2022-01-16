@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwitchSceneTest : MonoBehaviour
+public class UnlockNextPath : MonoBehaviour
 {
     [SerializeField]
     private PathData pathData;
