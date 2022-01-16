@@ -64,8 +64,8 @@ public class PathManager : MonoBehaviour
                 {
                     if (pathsInWorld[i].pathInfo == worldData.pathsInWorld[j])
                     {
-                        int index = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
-                        pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldData.pathsInWorld[index].firstTime;
+                        int worldDataIndex = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
+                        pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
                     }
                 }
             }
@@ -83,8 +83,8 @@ public class PathManager : MonoBehaviour
                 {
                     if (worldData.pathsInWorld[j].unlocked)
                     {
-                        int index = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
-                        pathsInWorld[i].unlocked = worldData.pathsInWorld[index].unlocked;
+                        int worldDataIndex = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
+                        pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
                     }
                 }
             }
