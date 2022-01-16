@@ -53,8 +53,8 @@ public class PathDecorator : MonoBehaviour
                     yield return new WaitForSeconds(waitDisplayNextPathDecoration);
                     levelToUnlock.levelNodeMat.color = Color.green;
                     firstTime = false;
-                    pathManager.UpdateFirstTime(firstTime, pathToDecorate.pathInfo);
                     yield return new WaitForSeconds(waitDisplayNextPathDecoration);
+                    pathManager.UpdateFirstTime(firstTime, pathToDecorate.pathInfo);
                 }
                 else
                 {
