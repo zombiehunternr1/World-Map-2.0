@@ -62,9 +62,10 @@ public class PathManager : MonoBehaviour
             {
                 for (int j = 0; j < worldData.pathsInWorld.Count; j++)
                 {
-                    if (i == j)
+                    if (pathsInWorld[i].pathInfo == worldData.pathsInWorld[j])
                     {
-                        pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldData.pathsInWorld[j].firstTime;
+                        int index = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
+                        pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldData.pathsInWorld[index].firstTime;
                     }
                 }
             }
@@ -76,31 +77,49 @@ public class PathManager : MonoBehaviour
     {
         for (int i = 0; i < pathsInWorld.Count; i++)
         {
-            pathsInWorld[i].unlocked = worldData.pathsInWorld[i].unlocked;
+            for(int j = 0; j < worldData.pathsInWorld.Count; j++)
+            {
+                if(pathsInWorld[i].pathInfo == worldData.pathsInWorld[j])
+                {
+                    if (worldData.pathsInWorld[j].unlocked)
+                    {
+                        int index = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
+                        pathsInWorld[i].unlocked = worldData.pathsInWorld[index].unlocked;
+                    }
+                }
+            }
         }
-        CheckAlreadyUnlockedPaths();
+       CheckAlreadyUnlockedPaths();
     }
 
     private void CheckAlreadyUnlockedPaths()
     {
-        for(int i = 0; i < worldData.pathsInWorld.Count; i++)
+        for(int i = 0; i < pathsInWorld.Count; i++)
         {
-            if (worldData.pathsInWorld[i].unlocked)
+            for (int j = 0; j < worldData.pathsInWorld.Count; j++)
             {
-                if (worldData.pathsInWorld[i].firstTime == true)
+                if(pathsInWorld[i].pathInfo == worldData.pathsInWorld[j])
                 {
-                    PathDecorator pathDecor = pathsInWorld[i].GetComponent<PathDecorator>();
-                    pathDecor.firstTime = worldData.pathsInWorld[i].firstTime;
-                    pathsInWorld[i].unlocked = worldData.pathsInWorld[i].unlocked;
-                    pathDecor.StartCoroutine(pathDecor.DecoratePath());
-                }
-                else
-                {
-                    pathsInWorld[i].unlocked = worldData.pathsInWorld[i].unlocked;
-                    pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldData.pathsInWorld[i].firstTime;
-                }
+                    if (worldData.pathsInWorld[j].unlocked)
+                    {
+                        int worldDataIndex = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
+                        PathDecorator pathDecor = pathsInWorld[i].GetComponent<PathDecorator>();
+                        if (pathsInWorld[i].GetComponent<PathDecorator>().firstTime == true)
+                        {
+                            pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                            pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
+                            pathDecor.StartCoroutine(pathDecor.DecoratePath());
+                        }
+                        else
+                        {
+                            pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
+                            pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                            pathDecor.StartCoroutine(pathDecor.DecoratePath());
+                        }
+                    }
+                }             
             }
-        }
+        }   
     }
     private bool CheckFirstTimeUnlocked()
     {
@@ -110,7 +129,6 @@ public class PathManager : MonoBehaviour
             {
                 if (pathsInWorld[i].GetComponent<PathDecorator>().firstTime)
                 {
-                    worldData.pathsInWorld[i].unlocked = true;
                     return false;
                 }
             }

@@ -28,14 +28,6 @@ public class PathDecorator : MonoBehaviour
         levelToUnlock.levelNodeMat.color = Color.red;
     }
 
-    private void Start()
-    {
-        if (pathToDecorate.unlocked && !firstTime)
-        {
-            StartCoroutine(DecoratePath());
-        }
-    }
-
     public IEnumerator DecoratePath()
     {
         if (frequency <= 0 || pathDecorTransform == null)
