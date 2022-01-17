@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PathDecorator : MonoBehaviour
 {
-    //[HideInInspector]
-    public bool firstTime = true;
     [SerializeField]
     private float waitDisplayNextPathDecoration;
     private float spacing = 1;
@@ -20,6 +18,12 @@ public class PathDecorator : MonoBehaviour
     private LevelNodeData levelToUnlock;
     private PathLayout pathToDecorate;
     private PathManager pathManager;
+
+    public bool firstTime
+    {
+        get;
+        set;
+    }
 
     private void OnEnable()
     {

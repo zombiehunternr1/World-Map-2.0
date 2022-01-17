@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
 
     public WorldData worldData;
     [SerializeField]
-    private PathManager pathManager;
-    [SerializeField]
     private float fadeSpeed;
     [SerializeField]
     private Image fadePanel;
@@ -26,6 +24,7 @@ public class GameManager : MonoBehaviour
     private TextMeshProUGUI levelName;
     [SerializeField]
     private TextMeshProUGUI levelEnterInfo;
+    private PathManager pathManager;
 
     private float waitAmount = 1;
     private float fadeAmount;
