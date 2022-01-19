@@ -99,7 +99,6 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-
     }
     private void CheckLevelIndex(LevelNodeData selectedLevel)
     {
