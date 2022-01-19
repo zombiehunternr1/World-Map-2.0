@@ -146,8 +146,8 @@ public class PathManager : MonoBehaviour
             {
                 if (pathsInWorld[i].GetComponent<CrashPathDecorator>())
                 {
-                    CrashPathDecorator patDecor = pathsInWorld[i].GetComponent<CrashPathDecorator>();
-                    if (patDecor.firstTime)
+                    CrashPathDecorator pathDecor = pathsInWorld[i].GetComponent<CrashPathDecorator>();
+                    if (pathDecor.firstTime)
                     {
                         return false;
                     }
