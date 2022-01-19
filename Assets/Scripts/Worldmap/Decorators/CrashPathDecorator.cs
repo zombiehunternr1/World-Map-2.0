@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PathDecorator : MonoBehaviour
+public class CrashPathDecorator : MonoBehaviour
 {
     [SerializeField]
     private float waitDisplayNextPathDecoration;

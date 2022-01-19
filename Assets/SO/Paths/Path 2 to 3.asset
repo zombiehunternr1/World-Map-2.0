@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Path 2 to 3
   m_EditorClassIdentifier: 
   unlocked: 0
-  firstTime: 1
+  firstTime: 0

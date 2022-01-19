@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5269580826378220492}
   - component: {fileID: 8511087219226765788}
+  - component: {fileID: -4206860128134146256}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Crash Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,6 +28,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -43,9 +45,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b6b4e22427e4efbb847bd026324e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Unlocked: 0
+  pathInfo: {fileID: 0}
   points:
   - {x: 1, y: 0, z: 0}
   - {x: 2, y: 0, z: 0}
   - {x: 3, y: 0, z: 0}
   - {x: 4, y: 0, z: 0}
+--- !u!114 &-4206860128134146256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7606864313699768910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619a8d0ad3919464e8af4ba8d3b9b293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitDisplayNextPathDecoration: 0
+  frequency: 0
+  skipAmount: 0
+  pathDecorTransform: {fileID: 0}
+  levelToUnlock: {fileID: 0}

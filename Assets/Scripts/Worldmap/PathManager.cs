@@ -65,7 +65,14 @@ public class PathManager : MonoBehaviour
                     if (pathsInWorld[i].pathInfo == worldData.pathsInWorld[j])
                     {
                         int worldDataIndex = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
-                        pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                        if (pathsInWorld[i].GetComponent<CrashPathDecorator>())
+                        {
+                            pathsInWorld[i].GetComponent<CrashPathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                        }
+                        else if (pathsInWorld[i].GetComponent<MarioPathDecorator>())
+                        {
+                            pathsInWorld[i].GetComponent<MarioPathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                        }
                     }
                 }
             }
@@ -103,18 +110,37 @@ public class PathManager : MonoBehaviour
                     if (worldData.pathsInWorld[j].unlocked)
                     {
                         int worldDataIndex = worldData.pathsInWorld.IndexOf(pathsInWorld[i].pathInfo);
-                        PathDecorator pathDecor = pathsInWorld[i].GetComponent<PathDecorator>();
-                        if (pathsInWorld[i].GetComponent<PathDecorator>().firstTime == true)
+                        if (pathsInWorld[i].GetComponent<CrashPathDecorator>())
                         {
-                            pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
-                            pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
-                            pathDecor.StartCoroutine(pathDecor.DecoratePath());
+                            CrashPathDecorator pathDecor = pathsInWorld[i].GetComponent<CrashPathDecorator>();
+                            if (pathsInWorld[i].GetComponent<CrashPathDecorator>().firstTime == true)
+                            {
+                                pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                                pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
+                                pathDecor.StartCoroutine(pathDecor.DecoratePath());
+                            }
+                            else
+                            {
+                                pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
+                                pathsInWorld[i].GetComponent<CrashPathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                                pathDecor.StartCoroutine(pathDecor.DecoratePath());
+                            }
                         }
-                        else
+                        else if (pathsInWorld[i].GetComponent<MarioPathDecorator>())
                         {
-                            pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
-                            pathsInWorld[i].GetComponent<PathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
-                            pathDecor.StartCoroutine(pathDecor.DecoratePath());
+                            MarioPathDecorator pathDecor = pathsInWorld[i].GetComponent<MarioPathDecorator>();
+                            if(pathsInWorld[i].GetComponent<MarioPathDecorator>().firstTime == true)
+                            {
+                                pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                                pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
+                                pathDecor.StartCoroutine(pathDecor.FirstTimeUnlocked());
+                            }
+                            else
+                            {
+                                pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
+                                pathsInWorld[i].GetComponent<MarioPathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                                pathDecor.AlreadyUnlocked();
+                            }
                         }
                     }
                 }             
@@ -127,9 +153,21 @@ public class PathManager : MonoBehaviour
         {
             if (pathsInWorld[i].unlocked)
             {
-                if (pathsInWorld[i].GetComponent<PathDecorator>().firstTime)
+                if (pathsInWorld[i].GetComponent<CrashPathDecorator>())
                 {
-                    return false;
+                    CrashPathDecorator patDecor = pathsInWorld[i].GetComponent<CrashPathDecorator>();
+                    if (patDecor.firstTime)
+                    {
+                        return false;
+                    }
+                }
+                else if (pathsInWorld[i].GetComponent<MarioPathDecorator>())
+                {
+                    MarioPathDecorator pathDecor = pathsInWorld[i].GetComponent<MarioPathDecorator>();
+                    if (pathDecor.firstTime)
+                    {
+                        return false;
+                    }
                 }
             }
         }
