@@ -113,18 +113,9 @@ public class PathManager : MonoBehaviour
                         if (pathsInWorld[i].GetComponent<CrashPathDecorator>())
                         {
                             CrashPathDecorator pathDecor = pathsInWorld[i].GetComponent<CrashPathDecorator>();
-                            if (pathsInWorld[i].GetComponent<CrashPathDecorator>().firstTime == true)
-                            {
-                                pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
-                                pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
-                                pathDecor.StartCoroutine(pathDecor.DecoratePath());
-                            }
-                            else
-                            {
-                                pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
-                                pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
-                                pathDecor.StartCoroutine(pathDecor.DecoratePath());
-                            }
+                            pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
+                            pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                            pathDecor.StartCoroutine(pathDecor.DecoratePath());
                         }
                         else if (pathsInWorld[i].GetComponent<MarioPathDecorator>())
                         {
