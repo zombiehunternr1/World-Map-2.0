@@ -96,10 +96,10 @@ public class PathManager : MonoBehaviour
                 }
             }
         }
-       CheckAlreadyUnlockedPaths();
+       CheckPathDecorStatus();
     }
 
-    private void CheckAlreadyUnlockedPaths()
+    private void CheckPathDecorStatus()
     {
         for(int i = 0; i < pathsInWorld.Count; i++)
         {
