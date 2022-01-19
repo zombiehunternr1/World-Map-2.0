@@ -896,7 +896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b6b4e22427e4efbb847bd026324e59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathInfo: {fileID: 0}
+  pathInfo: {fileID: 11400000, guid: 3fc2e735c1469b04c80fa3e67b15ef68, type: 2}
   points:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -941,7 +941,7 @@ Animator:
   m_GameObject: {fileID: 672026378}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b24dc0bca0a28c4b8a65fe184d3b562, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

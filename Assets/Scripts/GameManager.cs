@@ -101,19 +101,6 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
-    private int SetLevelIndex(int levelNumber)
-    {
-        if(levelNumber != 0)
-        {
-            return levelNumber;
-        }
-        else
-        {
-            return 0;
-        }
-    }
-
     private void CheckLevelIndex(LevelNodeData selectedLevel)
     {
         if (selectedLevel != null)
@@ -124,7 +111,7 @@ public class GameManager : MonoBehaviour
         {
             levelIndex = 0;
         }
-        if(SetLevelIndex(levelIndex) == 0)
+        if(levelIndex == 0)
         {
             SceneManager.LoadScene(levelIndex);
         }

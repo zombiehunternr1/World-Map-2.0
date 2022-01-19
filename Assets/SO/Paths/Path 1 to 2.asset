@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0507f3626e8c16140ace45a744abf965, type: 3}
   m_Name: Path 1 to 2
   m_EditorClassIdentifier: 
-  unlocked: 0
+  unlocked: 1
   firstTime: 1
