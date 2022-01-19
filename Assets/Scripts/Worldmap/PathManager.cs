@@ -122,7 +122,7 @@ public class PathManager : MonoBehaviour
                             else
                             {
                                 pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
-                                pathsInWorld[i].GetComponent<CrashPathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                                pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
                                 pathDecor.StartCoroutine(pathDecor.DecoratePath());
                             }
                         }
@@ -138,7 +138,7 @@ public class PathManager : MonoBehaviour
                             else
                             {
                                 pathsInWorld[i].unlocked = worldData.pathsInWorld[worldDataIndex].unlocked;
-                                pathsInWorld[i].GetComponent<MarioPathDecorator>().firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
+                                pathDecor.firstTime = worldData.pathsInWorld[worldDataIndex].firstTime;
                                 pathDecor.AlreadyUnlocked();
                             }
                         }
