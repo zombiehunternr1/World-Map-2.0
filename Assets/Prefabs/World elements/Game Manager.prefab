@@ -646,7 +646,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldData: {fileID: 11400000, guid: a0f2c0d35f5e01340bcc4345483d2867, type: 2}
-  pathManager: {fileID: 0}
   fadeSpeed: 0.5
   fadePanel: {fileID: 6958014743046614188}
   levelEnterContainer: {fileID: 6958014742705644774}
@@ -878,7 +877,7 @@ GameObject:
   - component: {fileID: 6958014744377894391}
   - component: {fileID: 6958014744377894388}
   m_Layer: 5
-  m_Name: Worldmap Canvas
+  m_Name: World map Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
