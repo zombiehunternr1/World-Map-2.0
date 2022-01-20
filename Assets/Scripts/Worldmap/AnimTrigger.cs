@@ -10,9 +10,11 @@ public class AnimTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PathNavigator pathNavigator = other.GetComponent<PathNavigator>();
-        if(animOptions == animationOptions.Jump)
+        switch (animOptions)
         {
-            pathNavigator.playerAnimator.Play("Jump");
+            case animationOptions.Jump:
+                pathNavigator.playerAnimator.Play("Jump");
+                break;
         }
     }
 }
