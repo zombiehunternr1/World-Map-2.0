@@ -19,10 +19,9 @@ public class PathNavigator : MonoBehaviour
         get;
         set;
     }
+    public Animator playerAnimator; //Not needed to implement until after cube tutorial explanation is done
     [SerializeField]
     private PathLayout currentPath;
-    [SerializeField]
-    private Animator playerAnimator; //Not needed to implement until after cube tutorial explanation is done
     [SerializeField]
     private LevelNodeData currentLevel;
     [SerializeField]
@@ -381,16 +380,22 @@ public class PathNavigator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        StopAllCoroutines();
-        StartCoroutine(PositionPlayerOnLevel(other.transform));
-        currentLevel = other.GetComponent<LevelNodeData>();
-        GameManager.sceneManagerInstance.SetLevelUIDataDisplay(currentLevel);
+        if (other.GetComponent<LevelNodeData>())
+        {
+            StopAllCoroutines();
+            StartCoroutine(PositionPlayerOnLevel(other.transform));
+            currentLevel = other.GetComponent<LevelNodeData>();
+            GameManager.sceneManagerInstance.SetLevelUIDataDisplay(currentLevel);
+        }
     }
 
-    private void OnTriggerExit()
-    {  
-        GameManager.sceneManagerInstance.ToggleEnterLevelInfo(false);
-        GameManager.sceneManagerInstance.SetLevelUIDataDisplay(null);
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<LevelNodeData>())
+        {
+            GameManager.sceneManagerInstance.ToggleEnterLevelInfo(false);
+            GameManager.sceneManagerInstance.SetLevelUIDataDisplay(null);
+        }
     }
 
     #region Inputsystem
