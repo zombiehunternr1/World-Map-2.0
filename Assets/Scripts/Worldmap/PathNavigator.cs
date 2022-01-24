@@ -9,7 +9,7 @@ public class PathNavigator : MonoBehaviour
     #region Variables
     //Speed variables
     [SerializeField]
-    private float positioningSpeedOnPath;
+    private float DefaultPathSpeed;
     [SerializeField]
     private float positioningSpeedOnLevelNode;
 
@@ -19,6 +19,25 @@ public class PathNavigator : MonoBehaviour
         get;
         set;
     }
+
+    public bool isAnimOnLocation
+    {
+        get;
+        set;
+    }
+
+    public bool isRunningAnim
+    {
+        get;
+        set;
+    }
+
+    public float positioningSpeedOnPath
+    {
+        get;
+        set;
+    }
+
     public Animator playerAnimator; //Not needed to implement until after cube tutorial explanation is done
     [SerializeField]
     private PathLayout currentPath;
@@ -28,6 +47,7 @@ public class PathNavigator : MonoBehaviour
     private WorldData worldMapLevel;
     private Vector3 currentPathPosition;
     private Vector3 currentLevelPosition;
+    [SerializeField]
     private float progress;
 
     //Player input
@@ -36,6 +56,8 @@ public class PathNavigator : MonoBehaviour
 
     private void Start()
     {
+        positioningSpeedOnPath = DefaultPathSpeed;
+        isRunningAnim = true;
         if(worldMapLevel.currentLevel == null)
         {
             transform.position = currentLevel.transform.position;
@@ -48,7 +70,19 @@ public class PathNavigator : MonoBehaviour
         }
     }
 
+    private void ContinueClimbing()
+    {
+        Debug.Log("Hallo");
+        isAnimOnLocation = false;
+    }
+
+    private void PerformedAnimation()
+    {
+        isRunningAnim = true;
+    }
+
     #region PlayerMovement
+
     private void CheckDirection(Vector2 SelectedDirection)
     {
         //Up
@@ -315,19 +349,25 @@ public class PathNavigator : MonoBehaviour
 
     private IEnumerator MovePlayer()
     {
-        playerAnimator.Play("Run"); //Not needed to implement until after cube tutorial explanation is done
         if (progress < 1)
         {
             while (progress < 1f)
             {
-                progress += Time.deltaTime / positioningSpeedOnPath;
-                if (progress > 1f)
+                if (!isAnimOnLocation)
                 {
-                    progress = 1f;
+                    if (isRunningAnim)
+                    {
+                        playerAnimator.Play("Run");
+                    }
+                    progress += positioningSpeedOnPath * Time.deltaTime;
+                    if (progress > 1f)
+                    {
+                        progress = 1f;
+                    }
+                    currentPathPosition = currentPath.GetPoint(progress);
+                    transform.localPosition = currentPathPosition;
+                    transform.LookAt(currentPathPosition + currentPath.GetDirection(progress));
                 }
-                currentPathPosition = currentPath.GetPoint(progress);
-                transform.localPosition = currentPathPosition;
-                transform.LookAt(currentPathPosition + currentPath.GetDirection(progress));
                 yield return progress;
             }
         }
@@ -335,14 +375,17 @@ public class PathNavigator : MonoBehaviour
         {
             while (progress > 0)
             {
-                progress -= Time.deltaTime / positioningSpeedOnPath;
+                progress -= positioningSpeedOnPath * Time.deltaTime;
                 if (progress < 0)
                 {
                     progress = 0;
                 }
                 currentPathPosition = currentPath.GetPoint(progress);
                 transform.localPosition = currentPathPosition;
-                transform.LookAt(currentPathPosition - currentPath.GetDirection(progress));
+                if (!isAnimOnLocation)
+                {
+                    transform.LookAt(currentPathPosition - currentPath.GetDirection(progress));
+                }
                 yield return progress;
             }
         }
@@ -371,7 +414,8 @@ public class PathNavigator : MonoBehaviour
                 yield return transform.localRotation;
             }
         }
-        playerAnimator.Play("Idle"); //Not needed to implement until after cube tutorial explanation is done
+        //playerAnimator.Play("Idle");
+        Debug.Log("Hallo");
         yield return new WaitForSeconds(0.5f);
         progress = 0;
         canMove = true;

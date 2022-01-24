@@ -75,10 +75,10 @@ public class PathLayout : MonoBehaviour {
 		Vector3 point = points[points.Length - 1];
 		Array.Resize(ref points, points.Length - 3);
 		point.x -= 1;
-		points[points.Length - 1] = point;
+		points[points.Length] = point;
 		point.x -= 1;
-		points[points.Length - 1] = point;
+		points[points.Length] = point;
 		point.x -= 1;
-		points[points.Length - 1] = point;
+		points[points.Length] = point;
 	}
 }
