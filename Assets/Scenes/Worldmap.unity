@@ -1861,12 +1861,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd72a44fe8c80b4885e65d9d02a4dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positioningSpeedOnPath: 2
+  DefaultPathSpeed: 0.5
   positioningSpeedOnLevelNode: 4
   playerAnimator: {fileID: 2935908556719135153}
   currentPath: {fileID: 672026379}
   currentLevel: {fileID: 1289563162110242094}
   worldMapLevel: {fileID: 11400000, guid: a0f2c0d35f5e01340bcc4345483d2867, type: 2}
+  progress: 0
 --- !u!114 &2052383202
 MonoBehaviour:
   m_ObjectHideFlags: 0

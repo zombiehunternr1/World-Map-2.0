@@ -375,6 +375,13 @@ public class PathNavigator : MonoBehaviour
         {
             while (progress > 0)
             {
+                if (!isAnimOnLocation)
+                {
+                    if (isRunningAnim)
+                    {
+                        playerAnimator.Play("Run");
+                    }
+                }
                 progress -= positioningSpeedOnPath * Time.deltaTime;
                 if (progress < 0)
                 {
@@ -382,10 +389,7 @@ public class PathNavigator : MonoBehaviour
                 }
                 currentPathPosition = currentPath.GetPoint(progress);
                 transform.localPosition = currentPathPosition;
-                if (!isAnimOnLocation)
-                {
-                    transform.LookAt(currentPathPosition - currentPath.GetDirection(progress));
-                }
+                transform.LookAt(currentPathPosition - currentPath.GetDirection(progress));
                 yield return progress;
             }
         }
@@ -414,8 +418,7 @@ public class PathNavigator : MonoBehaviour
                 yield return transform.localRotation;
             }
         }
-        //playerAnimator.Play("Idle");
-        Debug.Log("Hallo");
+        playerAnimator.Play("Idle");
         yield return new WaitForSeconds(0.5f);
         progress = 0;
         canMove = true;
