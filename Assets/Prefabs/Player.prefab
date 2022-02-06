@@ -1226,12 +1226,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd72a44fe8c80b4885e65d9d02a4dda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positioningSpeedOnPath: 2
+  DefaultPathSpeed: 0
   positioningSpeedOnLevelNode: 4
+  model: {fileID: 0}
   playerAnimator: {fileID: 5043128464865863851}
   currentPath: {fileID: 0}
   currentLevel: {fileID: 0}
   worldMapLevel: {fileID: 11400000, guid: a0f2c0d35f5e01340bcc4345483d2867, type: 2}
+  progress: 0
 --- !u!65 &7873061635033616634
 BoxCollider:
   m_ObjectHideFlags: 0

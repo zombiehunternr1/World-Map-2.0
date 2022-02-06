@@ -26,6 +26,12 @@ public class PathNavigator : MonoBehaviour
         set;
     }
 
+    public bool isVertical
+    {
+        get;
+        set;
+    }
+
     public bool isRunningAnim
     {
         get;
@@ -38,7 +44,9 @@ public class PathNavigator : MonoBehaviour
         set;
     }
 
-    public Animator playerAnimator; //Not needed to implement until after cube tutorial explanation is done
+    public Animator playerAnimator;
+    [SerializeField]
+    private Transform model;
     [SerializeField]
     private PathLayout currentPath;
     [SerializeField]
@@ -72,12 +80,12 @@ public class PathNavigator : MonoBehaviour
 
     private void ContinueClimbing()
     {
-        Debug.Log("Hallo");
         isAnimOnLocation = false;
     }
 
     private void PerformedAnimation()
     {
+        isAnimOnLocation = false;
         isRunningAnim = true;
     }
 
@@ -353,20 +361,28 @@ public class PathNavigator : MonoBehaviour
         {
             while (progress < 1f)
             {
+                currentPathPosition = currentPath.GetPoint(progress);
                 if (!isAnimOnLocation)
                 {
                     if (isRunningAnim)
                     {
                         playerAnimator.Play("Run");
                     }
+                    else if (isVertical)
+                    {
+                        Vector3 targetPos = new Vector3(model.position.x, currentPathPosition.z, model.position.z);
+                        transform.LookAt(currentPathPosition + targetPos);
+                    }
+                    else
+                    {
+                        transform.LookAt(currentLevelPosition + currentPath.GetDirection(progress));
+                    }
                     progress += positioningSpeedOnPath * Time.deltaTime;
                     if (progress > 1f)
                     {
                         progress = 1f;
                     }
-                    currentPathPosition = currentPath.GetPoint(progress);
                     transform.localPosition = currentPathPosition;
-                    transform.LookAt(currentPathPosition + currentPath.GetDirection(progress));
                 }
                 yield return progress;
             }
@@ -375,21 +391,29 @@ public class PathNavigator : MonoBehaviour
         {
             while (progress > 0)
             {
+                currentPathPosition = currentPath.GetPoint(progress);
                 if (!isAnimOnLocation)
                 {
                     if (isRunningAnim)
                     {
                         playerAnimator.Play("Run");
                     }
-                }
-                progress -= positioningSpeedOnPath * Time.deltaTime;
-                if (progress < 0)
-                {
-                    progress = 0;
-                }
-                currentPathPosition = currentPath.GetPoint(progress);
-                transform.localPosition = currentPathPosition;
-                transform.LookAt(currentPathPosition - currentPath.GetDirection(progress));
+                    else if (isVertical)
+                    {
+                        Vector3 targetPos = new Vector3(model.position.x, currentPathPosition.z, model.position.z);
+                        transform.LookAt(currentPathPosition - targetPos);
+                    }
+                    else
+                    {
+                        transform.LookAt(currentLevelPosition - currentPath.GetDirection(progress));
+                    }
+                    progress -= positioningSpeedOnPath * Time.deltaTime;
+                    if (progress < 0)
+                    {
+                        progress = 0;
+                    }
+                    transform.localPosition = currentPathPosition;
+                }        
                 yield return progress;
             }
         }
