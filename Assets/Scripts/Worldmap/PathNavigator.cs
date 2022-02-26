@@ -367,15 +367,12 @@ public class PathNavigator : MonoBehaviour
                     if (isRunningAnim)
                     {
                         playerAnimator.Play("Run");
+                        transform.LookAt(currentPathPosition + currentPath.GetDirection(progress));
                     }
                     else if (isVertical)
                     {
                         Vector3 targetPos = new Vector3(model.position.x, currentPathPosition.z, model.position.z);
                         transform.LookAt(currentPathPosition + targetPos);
-                    }
-                    else
-                    {
-                        transform.LookAt(currentLevelPosition + currentPath.GetDirection(progress));
                     }
                     progress += positioningSpeedOnPath * Time.deltaTime;
                     if (progress > 1f)
@@ -397,15 +394,12 @@ public class PathNavigator : MonoBehaviour
                     if (isRunningAnim)
                     {
                         playerAnimator.Play("Run");
+                        transform.LookAt(currentPathPosition - currentPath.GetDirection(progress));
                     }
                     else if (isVertical)
                     {
                         Vector3 targetPos = new Vector3(model.position.x, currentPathPosition.z, model.position.z);
-                        transform.LookAt(currentPathPosition - targetPos);
-                    }
-                    else
-                    {
-                        transform.LookAt(currentLevelPosition - currentPath.GetDirection(progress));
+                        transform.LookAt(currentPathPosition + targetPos);
                     }
                     progress -= positioningSpeedOnPath * Time.deltaTime;
                     if (progress < 0)
@@ -413,7 +407,7 @@ public class PathNavigator : MonoBehaviour
                         progress = 0;
                     }
                     transform.localPosition = currentPathPosition;
-                }        
+                }
                 yield return progress;
             }
         }
