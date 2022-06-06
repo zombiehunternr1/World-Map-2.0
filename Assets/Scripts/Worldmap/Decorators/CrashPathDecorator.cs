@@ -55,14 +55,14 @@ public class CrashPathDecorator : MonoBehaviour
                 if (firstTime)
                 {
                     yield return new WaitForSeconds(waitDisplayNextPathDecoration);
-                    levelToUnlock.levelNodeMat.color = Color.green;
+                    levelToUnlock.ChangeLevelColorToUnlocked();
                     firstTime = false;
                     yield return new WaitForSeconds(waitDisplayNextPathDecoration);
                     pathManager.UpdateFirstTime(firstTime, pathToDecorate.pathInfo);
                 }
                 else
                 {
-                    levelToUnlock.levelNodeMat.color = Color.green;
+                    levelToUnlock.ChangeLevelColorToUnlocked();
                 }
                 StopAllCoroutines();
             }
