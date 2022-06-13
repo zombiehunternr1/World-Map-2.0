@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
         }
         if(levelIndex == 0)
         {
+            levelInfoContainer.gameObject.SetActive(true);
             SceneManager.LoadScene(levelIndex);
         }
         else
